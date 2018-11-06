@@ -1,0 +1,2 @@
+# pkMKDA
+Projekt kompetencyjny. 
