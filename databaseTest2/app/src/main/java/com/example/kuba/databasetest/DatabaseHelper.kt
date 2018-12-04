@@ -12,29 +12,29 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME, 
 
     companion object {
 
-        val DATABASE_NAME = "Student"
+        val DATABASE_NAME = "foodEmperor"
         val DATABASE_VERSION = 1
 
-        val TABLE_NAME = "student_table"
-        val FOOD_TAB = "food_table"
+        val TABLE_NAME = "user"
+        val FOOD_TAB = "Products"
 
-        val COL_1 = "ID"
+        val COL_1 = "userId"
         val COL_2 = "login"
         val COL_3 = "password"
         val COL_4 = "sex"
 
-        val FOOD_ID = "foodId"
-        val FOOD_NAME = "foodName"
-        val FOOD_TYPE = "foodType"
-        val FOOD_CALORIES = "foodCalories"
+        val FOOD_ID = "ProductsId"
+        val FOOD_NAME = "name"
+        val FOOD_TYPE = "type"
+        val FOOD_CALORIES = "calories"
 
 
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-            db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login TEXT, password TEXT, sex TEXT)")
-            db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodType TEXT NOT NULL, foodCalories INTEGER NOT NULL) ")
+            //db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login TEXT, password TEXT, sex TEXT)")
+            //db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodType TEXT NOT NULL, foodCalories INTEGER NOT NULL) ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -49,7 +49,6 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME, 
         cv.put(COL_2,login)
         cv.put(COL_3,password)
         cv.put(COL_4,sex)
-
         val res = db.insert(TABLE_NAME,null,cv)
         db.close()
 
@@ -92,7 +91,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context,DATABASE_NAME, 
         cv.put(COL_3,password)
         cv.put(COL_4,sex)
 
-        db.update(TABLE_NAME,cv,"ID=?", arrayOf(id))
+        db.update(TABLE_NAME,cv,"userId=?", arrayOf(id))
         return true
     }
 
