@@ -20,6 +20,7 @@ class addFood : Activity() {
         myDb = DatabaseHelper(this)
 
 
+
          AddData()
         viewAllData()
     }

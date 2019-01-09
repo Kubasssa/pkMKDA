@@ -11,7 +11,7 @@ import android.widget.Toast
 
 
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     lateinit var RegistLink: TextView
     lateinit var LoginButton: Button
@@ -20,12 +20,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
 
         RegistLink=findViewById(R.id.registLink)
         LoginButton=findViewById(R.id.loginButton)
         LoginLog=findViewById(R.id.loginLog)
         PasswordLog=findViewById(R.id.passwordLog)
+
 
         goRegist()
         logIn()
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }else{
                 while (res.moveToNext()){
                     if(LoginLog.text.toString().trim()==res.getString(1)&& PasswordLog.text.toString().trim()==res.getString(2)){
-                        val Intent = Intent(this,addFood::class.java)
+                        val Intent = Intent(this,MainActivity::class.java)
                         startActivity(Intent);
                         userExist =true
                     }else{

@@ -69,7 +69,7 @@ class RegView : AppCompatActivity() {
 
             if(isInserted==true){
                 Toast.makeText(applicationContext,"Data Inserted",Toast.LENGTH_SHORT).show()
-                val Intent = Intent(this,MainActivity::class.java)
+                val Intent = Intent(this,LoginActivity::class.java)
                 startActivity(Intent);
             }else{
                 Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()

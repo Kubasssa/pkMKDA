@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">databaseTest</string>
     <string name="title_activity_add_food">addFood</string>
+    <string name="app_name2">FinalLayoutProject</string>
+    <string name="layout_item_database_text_top">TEXT TOP</string>
+    <string name="layout_item_database_text_bottom">TEXT BOT</string>
+    <string name="layout_search_menu_search">Search</string>
+    <string name="bottom_nav_text1">tab1</string>
+    <string name="bottom_nav_text2">tab2</string>
 </resources>
