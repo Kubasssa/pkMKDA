@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009876"
+    android:padding="5dp">
+
+    <!-- calories bar-->
+
+    <TextView
+        android:id="@+id/text_calories"
+        android:text="TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_calories"
+        style="@style/CustomProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_calories"/>
+
+    <TextView
+        android:id="@+id/procent_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/progress_calories"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="0%" />
+
+    <!-- carbs bar-->
+
+    <TextView
+        android:id="@+id/text_carbs"
+        android:text="TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="70dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_carbs"
+        style="@style/CustomProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_carbs"/>
+
+    <TextView
+        android:id="@+id/procent_carbs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/progress_carbs"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="85dp"
+        android:text="0%" />
+
+    <!-- fat bar-->
+
+    <TextView
+        android:id="@+id/text_fat"
+        android:text="TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="140dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_fat"
+        style="@style/CustomProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_fat"/>
+
+    <TextView
+        android:id="@+id/procent_fat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/progress_fat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="155dp"
+        android:text="0%" />
+
+    <!-- protein bar-->
+
+    <TextView
+        android:id="@+id/text_protein"
+        android:text="TEXT"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="210dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_protein"
+        style="@style/CustomProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_protein"/>
+
+    <TextView
+        android:id="@+id/procent_protein"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/progress_protein"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="225dp"
+        android:text="0%" />
+
+
+
+
+</RelativeLayout>

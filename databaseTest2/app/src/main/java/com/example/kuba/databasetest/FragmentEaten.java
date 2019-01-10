@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentEaten extends Fragment
 {
@@ -37,7 +36,8 @@ public class FragmentEaten extends Fragment
         initRecyclerView();
         /***** ^ *****/
         fragmentEatenRecyclerView = view.findViewById(R.id.fe_recycler_view); //may crash here
-        layoutManager = new LinearLayoutManager(getActivity());
+        //layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManagerWrapper(getActivity(),LinearLayoutManager.VERTICAL,false);
         fragmentEatenAdapter = new AdapterEaten(fragmentEatenItemList);
         fragmentEatenRecyclerView.setLayoutManager(layoutManager);
         fragmentEatenRecyclerView.setAdapter(fragmentEatenAdapter);
@@ -103,15 +103,21 @@ public class FragmentEaten extends Fragment
         }
     }
 
-    public void removeItem(int position)
-    {
+    public void removeItem(int position) {
         /***** crash on deleting position other than highest *****/
         database.showShitInDatabase();
         System.out.println(position);
-        database.deleteData(position+1);
+
+        /**** delete item from temporary array list*****/
         fragmentEatenItemList.remove(position);
-        System.out.println("(Adapter)Position deleted: "+position);
-        fragmentEatenAdapter.notifyItemChanged(position);
+        System.out.println("(Adapter)Position deleted: " + position);
+
+        /**** delete item from database*****/
+        database.deleteData(position + 1);
+
+        /**** update adapter, think might me changed to add some animations****/
+        //fragmentEatenAdapter.notifyDataSetChanged();
+        fragmentEatenAdapter.notifyItemRemoved(position);
     }
 
 }

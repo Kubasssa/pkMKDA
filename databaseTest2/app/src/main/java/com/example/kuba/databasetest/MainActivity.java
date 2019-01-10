@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
 
                             break;
                         case R.id.bottom_nav2:
-                            selectedFragment = new FragmentUnused();
+                            selectedFragment = new FragmentStats();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.ma_fragment_container,selectedFragment).commit();
