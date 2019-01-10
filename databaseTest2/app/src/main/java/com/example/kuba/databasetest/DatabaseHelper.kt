@@ -37,7 +37,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     {
         db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login STRING, password TEXT, sex TEXT)")
         db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
-        db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -79,7 +79,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun showShitInDatabase()
-    {
+    { /***** prints foodId and foodName from food_eaten table*****/
         val db = this.readableDatabase
         var e = ArrayList<String>()
         val d = db.rawQuery("SELECT * FROM $EATEN_TAB", null)
@@ -93,13 +93,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun getAllFoodData(): Cursor {
 
         val db = this.readableDatabase
-        val check = db.rawQuery("SELECT COUNT(*) FROM $FOOD_TAB", null)
-        check.moveToFirst();
-        var icount = check.getInt(0);
+        var icount = getTopId()
         if(icount == 0)
         {
             populateDatabase()
-            //populateEatenbase()
         }
         return db!!.rawQuery("SELECT foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins FROM $FOOD_TAB", null)
     }
@@ -132,43 +129,52 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     fun deleteData(id: Int) {
         val db = this.writableDatabase
-        val check = db.rawQuery("SELECT MAX(foodId) FROM $EATEN_TAB", null)
-        var e = ArrayList<Int>()
-        while(check.moveToNext()) {e.add(check.getInt(0))}
+
+        /**** get top foodId****/
+        val topIndex = getTopId()
+        println("Top foodId index: "+topIndex)
+
+        /**** delete item ****/
         db.execSQL("DELETE FROM $EATEN_TAB WHERE foodId='"+id+"' ")
         println("(Database)Position deleted: " +id)
-        db.execSQL("UPDATE $EATEN_TAB SET foodId = '"+id+"' WHERE foodId = '"+e.get(0)+"' ")
+
+        /**** updating primary key in database ****/
+        for(i in (id+1)..topIndex) { db.execSQL("UPDATE $EATEN_TAB SET foodId = '" + (i - 1) + "' WHERE foodId = '" + i + "' ") }
 
     }
 
     fun populateDatabase()
     {
         val db = this.writableDatabase
-//        val cv = ContentValues()
-//        cv.put("foodName", "Agrest")
-//        cv.put("foodPortion", "100g")
-//        cv.put("foodCalories", 41.0)
-//        cv.put("foodCrabs", 0.2)
-//        cv.put("foodFat", 11.8)
-//        cv.put("foodProteins", 0.8)
-//        var res = db!!.insert(FOOD_TAB, null, cv)
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Agrst','100g', 41.0 ,0.2 , 11.8, 0.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Grapes','100g', 41.0 ,0.2 , 11.8, 0.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White Bread','100g', 238.0 ,50.0 , 1.2, 6.15)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Spaghetti','300g', 450.0 ,54.0 , 5.11, 7.12)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Pork','200g', 271.0 ,0.0 , 17.04, 27.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Orange','50g', 47.0 ,12.0 , 0.1, 0.9)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Sunflower Seeds','25g', 141.0 ,5.0 , 12.5, 6.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lamb','100g', 294.0 ,0.0 , 21.0, 25.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('BigMac','200g', 514.0 ,40.4 , 30.2, 24.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Potatoes','100g', 76.0 ,17.0 , 0.1, 2.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Broccoli','100g', 33.0 ,7.0 , 0.4, 2.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Fries','100g', 311.0 , 41.0 , 15.5, 3.4)")
          }
 
     fun eatProduct(item: Item)
     {
         val db = this.writableDatabase
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('"+item.text1+"','"+item.text2+"','"+item.calories+"','"+item.carbs+"','"+item.fat+"','"+item.proteins+"')")
+        val index = getTopId()
+        db.execSQL("INSERT INTO $EATEN_TAB (foodId, foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('"+(index+1)+"','"+item.text1+"','"+item.text2+"','"+item.calories+"','"+item.carbs+"','"+item.fat+"','"+item.proteins+"')")
     }
 
-    fun populateEatenbase()
-    {
-        val db = this.writableDatabase
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Banana1','100g', 41.0 ,0.2 , 11.8, 0.8)")
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Banana22','100g', 41.0 ,0.2 , 11.8, 0.8)")
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Banana333','100g', 41.0 ,0.2 , 11.8, 0.8)")
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Banana4444','100g', 41.0 ,0.2 , 11.8, 0.8)")
-        db.execSQL("INSERT INTO $EATEN_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Banana55555','100g', 41.0 ,0.2 , 11.8, 0.8)")
-
+    fun getTopId(): Int {
+        val db = this.readableDatabase
+        /**** get top foodId****/
+        val check = db.rawQuery("SELECT MAX(foodId) FROM $EATEN_TAB", null)
+        var e = ArrayList<Int>()
+        while(check.moveToNext()) {e.add(check.getInt(0))}
+        if (e.get(0) == 0 || e.get(0) == null)
+            return 0
+        else
+            return e.get(0)
     }
 }
