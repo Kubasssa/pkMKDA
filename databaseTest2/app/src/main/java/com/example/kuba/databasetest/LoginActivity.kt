@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
     fun goRegist(){
         RegistLink.setOnClickListener(View.OnClickListener{
 
-            val Intent = Intent(this,RegView::class.java)
+            val Intent = Intent(this,RegistFinal::class.java)
             startActivity(Intent);
             return@OnClickListener
         })

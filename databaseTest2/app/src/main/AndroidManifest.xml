@@ -20,6 +20,7 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".RegView" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".RegistFinal"/>
         <activity
             android:name=".addFood"
             android:label="@string/title_activity_add_food"></activity>

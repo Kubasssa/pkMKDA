@@ -19,6 +19,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val TABLE_NAME = "user"
         val FOOD_TAB = "Products"
         val EATEN_TAB = "EatenProducts"
+        val CALORIES_TAB = "Calories"
 
         val COL_1 = "userId"
         val COL_2 = "login"
@@ -30,6 +31,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val FOOD_TYPE = "type"
         val FOOD_CALORIES = "calories"
 
+        val COL_5 = "amountOfCaloriesToEat"
+
 
     }
 
@@ -38,6 +41,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login STRING, password TEXT, sex TEXT)")
         db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
         db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT , amountOfCaloriesToEat DOUBLE NOT NULL, CaloriesAlreadyEaten DOUBLE) ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -53,7 +57,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cv.put(COL_3, password)
         cv.put(COL_4, sex)
         val res = db.insert(TABLE_NAME, null, cv)
-        db.close()
+        //db.close()
         return !res.equals(-1)
     }
 
@@ -157,7 +161,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Potatoes','100g', 76.0 ,17.0 , 0.1, 2.0)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Broccoli','100g', 33.0 ,7.0 , 0.4, 2.8)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Fries','100g', 311.0 , 41.0 , 15.5, 3.4)")
-         }
+    }
+
 
     fun eatProduct(item: Item)
     {
@@ -177,4 +182,17 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         else
             return e.get(0)
     }
+
+    fun addTotalCaloriesToEat( cal: Double): Double {
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_5, cal)
+
+        val res = db.insert(CALORIES_TAB, null, cv)
+        db.close()
+        return res.toDouble()
+
+    }
+
 }
