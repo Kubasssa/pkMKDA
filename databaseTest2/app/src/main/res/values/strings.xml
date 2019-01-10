@@ -7,4 +7,16 @@
     <string name="layout_search_menu_search">Search</string>
     <string name="bottom_nav_text1">tab1</string>
     <string name="bottom_nav_text2">tab2</string>
+
+    <string-array name="aktywność">
+        <item>Nikła-siedzący tryb życia</item>
+        <item>Mała-1-2 razy w tygodniu trening</item>
+        <item>Średnia-3-4 razy w tygodniu trening</item>
+        <item>Duża-3-4 razy w tygodniu trening/ praca fizyczna</item>
+        <item>Bardzo duża-zawodowni sportowcy/ trening codziennie </item>
+    </string-array>
+    <string-array name="płeć">
+        <item>Kobieta</item>
+        <item>Mężczyzna</item>
+    </string-array>
 </resources>
