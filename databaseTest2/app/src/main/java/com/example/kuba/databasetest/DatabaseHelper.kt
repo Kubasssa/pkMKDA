@@ -42,7 +42,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
         db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories int NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
         db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT, amountOfCaloriesToEat int, CaloriesAlreadyEaten int) ")
+        db.execSQL("INSERT INTO $TABLE_NAME (login, password, sex) VALUES ('a','a','kobieta')")
+        db.execSQL("INSERT INTO $CALORIES_TAB (amountOfCaloriesToEat) VALUES (2150)")
     }
+
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
@@ -230,6 +233,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val res = db.insert(CALORIES_TAB, null, cv)
         db.close()
         return res.toInt()
+    }
+
+    fun getUserId(loginTmp: String): Int{
+        val db = this.readableDatabase
+        val tmp = db.rawQuery("SELECT ID FROM $TABLE_NAME Where login= '"+loginTmp+"'",null)
+
+        val x = tmp.getInt(0)
+        return x
     }
 
 }
