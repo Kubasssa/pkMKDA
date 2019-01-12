@@ -81,7 +81,7 @@ public class FragmentEaten extends Fragment
         //List<Integer> productId = new ArrayList<>();
         ArrayList<String> productNames = new ArrayList<>();
         ArrayList<String> productPortion = new ArrayList<>();
-        ArrayList<Double> productCalories = new ArrayList<>();
+        ArrayList<Integer> productCalories = new ArrayList<>();
         ArrayList<Double> productCrabs = new ArrayList<>();
         ArrayList<Double> productFat = new ArrayList<>();
         ArrayList<Double> productProteins = new ArrayList<>();
@@ -90,7 +90,7 @@ public class FragmentEaten extends Fragment
             //productId.add(Integer.parseInt(y.getString(0)));
             productNames.add(y.getString(0));
             productPortion.add(y.getString(1));
-            productCalories.add(Double.parseDouble(y.getString(2)));
+            productCalories.add(Integer.parseInt(y.getString(2)));
             productCrabs.add(Double.parseDouble(y.getString(3)));
             productFat.add(Double.parseDouble(y.getString(4)));
             productProteins.add(Double.parseDouble(y.getString(5)));

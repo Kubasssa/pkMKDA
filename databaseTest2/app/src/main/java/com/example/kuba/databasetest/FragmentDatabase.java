@@ -80,7 +80,7 @@ public class FragmentDatabase extends Fragment
         /**** may need optimalization *****/
         List<String> productNames = new ArrayList<>();
         List<String> productPortion = new ArrayList<>();
-        List<Double> productCalories = new ArrayList<>();
+        List<Integer> productCalories = new ArrayList<>();
         List<Double> productCrabs = new ArrayList<>();
         List<Double> productFat = new ArrayList<>();
         List<Double> productProteins = new ArrayList<>();
@@ -89,7 +89,7 @@ public class FragmentDatabase extends Fragment
         {
             productNames.add(x.getString(0));
             productPortion.add(x.getString(1));
-            productCalories.add(Double.parseDouble(x.getString(2)));
+            productCalories.add(Integer.parseInt(x.getString(2)));
             productCrabs.add(Double.parseDouble(x.getString(3)));
             productFat.add(Double.parseDouble(x.getString(4)));
             productProteins.add(Double.parseDouble(x.getString(5)));
@@ -123,6 +123,7 @@ public class FragmentDatabase extends Fragment
 
         Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
         database.eatProduct(omnomnom);
+        database.addAlreadyEatenCalories(omnomnom.getCalories());
         Toast.makeText(getActivity(),"Data Inserted",Toast.LENGTH_SHORT).show();
     }
 

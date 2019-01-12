@@ -26,11 +26,14 @@ public class FragmentStats extends Fragment
     TextView mFatPercent;
     TextView mProteinPercent;
 
+    DatabaseHelper helper;
+
     private int caloriesEaten;
     private double crabsEaten;
     private double fatEaten;
     private double proteinEaten;
     private int dailyLimit;
+    public double percentOfEatenFood =0;
 
     @Nullable
     @Override
@@ -39,24 +42,31 @@ public class FragmentStats extends Fragment
         View view = inflater.inflate(R.layout.layout_frag_stats, container, false);
         initLayoutItems(view);
 
+        helper = new DatabaseHelper(view.getContext());
+        System.out.println(helper.getAlreadyEatenCalories());  //tu 0 wywala
+        mCaloriesProgress.setMax(helper.getSumOfCalories());
 
+        mCaloriesProgress.setProgress(1116);
 
-        mCaloriesProgress.setProgress(120);
         //mCaloriesProgress.setProgress(50,true); requires min api 24
-        mCaloriesPercent.setText(mCaloriesProgress.getProgress()+"%");
-        if(mCaloriesProgress.getProgress()>100)
+        percentOfEatenFood += (mCaloriesProgress.getProgress()*100 / helper.getSumOfCalories());
+
+        mCaloriesPercent.setText(percentOfEatenFood+"%");
+        if(mCaloriesProgress.getProgress()>helper.getSumOfCalories())
         {
             mCaloriesProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
             mCaloriesPercent.setText("Limit exceeded.");
         }
+
+        mCaloriesText.setText("Calories:"+helper.getSumOfCalories());
 
         return view;
     }
 
     void initLayoutItems(View view)
     {
+
         mCaloriesProgress = view.findViewById(R.id.progress_calories);
-        mCaloriesProgress.setMax(101);
         mCaloriesText = view.findViewById(R.id.text_calories);
         mCaloriesPercent = view.findViewById(R.id.procent_calories);
 
@@ -72,7 +82,6 @@ public class FragmentStats extends Fragment
         mProteinText = view.findViewById(R.id.text_protein);
         mProteinPercent = view.findViewById(R.id.procent_protein);
 
-        mCaloriesText.setText("Calories:");
         mCarbsText.setText("Carbs:");
         mFatText.setText("Fat:");
         mProteinText.setText("Proteins:");

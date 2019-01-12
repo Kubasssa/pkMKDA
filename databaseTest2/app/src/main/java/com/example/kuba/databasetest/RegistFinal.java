@@ -18,8 +18,8 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
     Float age;
     Float weight;
     Float height;
-    Double diff;
-    Double activity, kcal;
+    Double diff ,activity ,kcal;
+    int kcalInt;
     String sex,login,password,temp;
     TextView diffInput;
     Double diffInputValue = 0.0;
@@ -110,9 +110,10 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
                 if(sex.equals("Kobieta")){
                     kcal=(((665+(9.6*weight)+(1.8*height)-(4.7*age)))*activity)-(233.3*diff);
-                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcal);
+                    kcalInt = kcal.intValue();
+                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcalInt);
 
-                    helper.addTotalCaloriesToEat(kcal);
+                    helper.addTotalCaloriesToEat(kcalInt);
                     boolean isInserted = helper.insertUserData(login, password,sex);
 
                     if(isInserted==true){
@@ -125,9 +126,10 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                 }
                 else if(sex.equals("Mężczyzna")){
                     kcal=(((66+(13.7*weight)+(5*height)-(6.76*age)))*activity)-(233.3*diff);
-                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcal);
+                    kcalInt = kcal.intValue();
+                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcalInt);
 
-                    helper.addTotalCaloriesToEat(kcal);
+                    helper.addTotalCaloriesToEat(kcalInt);
                     boolean isInserted = helper.insertUserData(login, password,sex);
 
                     if(isInserted==true){

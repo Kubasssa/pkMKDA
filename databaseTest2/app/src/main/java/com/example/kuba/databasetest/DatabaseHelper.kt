@@ -32,7 +32,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val FOOD_CALORIES = "calories"
 
         val COL_5 = "amountOfCaloriesToEat"
-
+        val COL_6 = "CaloriesAlreadyEaten"
 
     }
 
@@ -40,8 +40,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     {
         db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login STRING, password TEXT, sex TEXT)")
         db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
-        db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
-        db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT , amountOfCaloriesToEat DOUBLE NOT NULL, CaloriesAlreadyEaten DOUBLE) ")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories int NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT, amountOfCaloriesToEat int, CaloriesAlreadyEaten int) ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -183,7 +183,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             return e.get(0)
     }
 
-    fun addTotalCaloriesToEat( cal: Double): Double {
+    fun addTotalCaloriesToEat( cal: Int): Int {
         val db = this.writableDatabase
 
         val cv = ContentValues()
@@ -191,8 +191,45 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         val res = db.insert(CALORIES_TAB, null, cv)
         db.close()
-        return res.toDouble()
+        return res.toInt()
 
+    }
+
+    fun getSumOfCalories():Int{
+        val db = this.readableDatabase
+        val tmp = db.rawQuery("SELECT amountOfCaloriesToEat FROM $CALORIES_TAB",null)
+
+        var e = ArrayList<Int>()
+        while(tmp.moveToNext()) {e.add(tmp.getInt(0))}
+        if (e.get(0) == 0 || e.get(0) == null)
+            return 0
+        else
+            return e.get(0)
+    }
+
+        //-----------------------nie działa!!. sout(getAlreadyEatenCalories) wywala 0. Pomimo tego że przed wykonaniem funkci
+        // ----------------------sout (omnomnom.getCalories()) dobrze pokazuje kalorie. Coś chyba z baza nie tak znowu xddd
+    fun getAlreadyEatenCalories():Int{
+        val db = this.readableDatabase
+        val tmp = db.rawQuery("SELECT CaloriesAlreadyEaten FROM $CALORIES_TAB",null)
+
+        var e = ArrayList<Int>()
+        while(tmp.moveToNext()) {e.add(tmp.getInt(0))}
+        if (e.get(0) == 0 || e.get(0) == null)
+            return 0
+        else
+            return e.get(0)
+    }
+
+    fun addAlreadyEatenCalories(cal: Int): Int{
+        val db = this.writableDatabase
+
+        val cv = ContentValues()
+        cv.put(COL_6, cal)
+
+        val res = db.insert(CALORIES_TAB, null, cv)
+        db.close()
+        return res.toInt()
     }
 
 }
