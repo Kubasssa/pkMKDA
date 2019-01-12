@@ -1,11 +1,12 @@
 Projekt kompetencyjny. 
 
 # TODO
-  - DatabaseHelper.kt -> napisać funkcje getAllEatenValues()
-    >desc: Potrzebna do przekazania danych do progress barów na FragmentStats
-  - Utworzenie tablicy z sumą kalorii (i potem też witamin)
-  - Zmienić we wszystkich bazach typ danych 'Kalorii' na INTEGER (w algorytmach żywieniowych zrobić rzutowanie z double na int)
+  ~~- DatabaseHelper.kt -> napisać funkcje getAllEatenValues()
+    >desc: Potrzebna do przekazania danych do progress barów na FragmentStats~~
+  ~~- Utworzenie tablicy z sumą kalorii (i potem też witamin)~~ caloriesEaten & caloriesToEat wrzucić do tablicy users?
+  ~~- Zmienić we wszystkich bazach typ danych 'Kalorii' na INTEGER (w algorytmach żywieniowych zrobić rzutowanie z double na int)~~
   - Połączyć dane z progress barami
+  - Poprawić kalkulator żywnościowy: chce przybać +/- na wadzę, prawdopodobnie trzeba zamienić znaki w algorytmie
   - Poprawić estetykę aplikacji
     >desc: Button 'addFromDatabase' we fragmencie FragmentEaten; layouty; kolory backgroundcolor; czcionki
   - _Propozycja:_ Dodawanie własnych produktów do bazy danych
