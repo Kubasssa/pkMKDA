@@ -9,6 +9,8 @@ Projekt kompetencyjny.
   - Poprawić kalkulator żywnościowy: chce przybać +/- na wadzę, prawdopodobnie trzeba zamienić znaki w algorytmie
   - Poprawić estetykę aplikacji
     >desc: Button 'addFromDatabase' we fragmencie FragmentEaten; layouty; kolory backgroundcolor; czcionki
+  - _Propozycja:_ Zmiana preferencji użytkownika (waga, przyrost wagi itd)
+  - _Propozycja:_ Notyfikacja przy przekroczeniu limitu amam
   - _Propozycja:_ Dodawanie własnych produktów do bazy danych
   - _Propozycja:_ Dodać zasady tworzenia konta (8 znaków, mail musi mieć @, brak polskich znaków itd)
   - _Propozycja(dużo roboty):_ Licznik zjedzonych produktów danego rodzaju
