@@ -38,7 +38,6 @@ public class FragmentEaten extends Fragment
         initButton(view);
 
         /***** onClick actions *****/
-
         buttonAddFromDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -100,10 +99,16 @@ public class FragmentEaten extends Fragment
         }
     }
 
-    public void removeItem(int position) {
-        /***** crash on deleting position other than highest *****/
+    public void removeItem(int position)
+    {
         database.showShitInDatabase();
         System.out.println(position);
+
+        /***** subtract values from 'calories' table *****/
+        database.addAlreadyEatenCalories((-1)*fragmentEatenItemList.get(position).getCalories());
+        database.addAlreadyEatenCarbs((-1.0)*fragmentEatenItemList.get(position).getCarbs());
+        database.addAlreadyEatenFat((-1.0)*fragmentEatenItemList.get(position).getFat());
+        database.addAlreadyEatenProteins((-1.0)*fragmentEatenItemList.get(position).getProteins());
 
         /**** delete item from temporary array list*****/
         fragmentEatenItemList.remove(position);

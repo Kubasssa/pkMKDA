@@ -11,61 +11,52 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
 public class FragmentStats extends Fragment
 {
     ProgressBar mCaloriesProgress;
     ProgressBar mCarbsProgress;
     ProgressBar mFatProgress;
-    ProgressBar mProteinProgress;
+    ProgressBar mProteinsProgress;
     TextView mCaloriesText;
     TextView mCarbsText;
     TextView mFatText;
-    TextView mProteinText;
+    TextView mProteinsText;
     TextView mCaloriesPercent;
     TextView mCarbsPercent;
     TextView mFatPercent;
-    TextView mProteinPercent;
+    TextView mProteinsPercent;
 
     DatabaseHelper helper;
 
-    private int caloriesEaten;
-    private double crabsEaten;
-    private double fatEaten;
-    private double proteinEaten;
-    private int dailyLimit;
-    public double percentOfEatenFood =0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.layout_frag_stats, container, false);
+
+        /** init database and layout items**/
+        initDatabse(view);
         initLayoutItems(view);
 
-        helper = new DatabaseHelper(view.getContext());
-       // System.out.println(helper.getAlreadyEatenCalories());  //tu 0 wywala @Antek i będzie wywalać, bo źle funkcja napisana xd
-        mCaloriesProgress.setMax(helper.getSumOfCalories());
-
-        mCaloriesProgress.setProgress(1116);
-
-        //mCaloriesProgress.setProgress(50,true); requires min api 24
-        percentOfEatenFood += (mCaloriesProgress.getProgress()*100 / helper.getSumOfCalories());
-
-        mCaloriesPercent.setText(percentOfEatenFood+"%");
-        if(mCaloriesProgress.getProgress()>helper.getSumOfCalories())
-        {
-            mCaloriesProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-            mCaloriesPercent.setText("Limit exceeded.");
-        }
-
-        mCaloriesText.setText("Calories: "+helper.getSumOfCalories());
+        /** progress bars management **/
+        initCaloriesBar();
+        initCarbsBar();
+        initFatBar();
+        initProteinsBar();
 
         return view;
     }
 
+    void initDatabse(View view)
+    {
+        helper = new DatabaseHelper(view.getContext());
+    }
+
     void initLayoutItems(View view)
     {
-
         mCaloriesProgress = view.findViewById(R.id.progress_calories);
         mCaloriesText = view.findViewById(R.id.text_calories);
         mCaloriesPercent = view.findViewById(R.id.procent_calories);
@@ -78,13 +69,76 @@ public class FragmentStats extends Fragment
         mFatText = view.findViewById(R.id.text_fat);
         mFatPercent = view.findViewById(R.id.procent_fat);
 
-        mProteinProgress = view.findViewById(R.id.progress_protein);
-        mProteinText = view.findViewById(R.id.text_protein);
-        mProteinPercent = view.findViewById(R.id.procent_protein);
+        mProteinsProgress = view.findViewById(R.id.progress_protein);
+        mProteinsText = view.findViewById(R.id.text_protein);
+        mProteinsPercent = view.findViewById(R.id.procent_protein);
+    }
 
-        mCarbsText.setText("Carbs:");
-        mFatText.setText("Fat:");
-        mProteinText.setText("Proteins:");
+    void initCaloriesBar()
+    {
+        mCaloriesText.setText("Calories: "+helper.getAlreadyEatenCalories()+"/"+helper.getCaloriesToEat());
+        mCaloriesProgress.setMax(helper.getCaloriesToEat()+1);
+        mCaloriesProgress.setProgress(helper.getAlreadyEatenCalories());
+        double percentOfEatenCalories = (mCaloriesProgress.getProgress()*100 / helper.getCaloriesToEat());
+        mCaloriesPercent.setText(percentOfEatenCalories+"%");
 
+        if(mCaloriesProgress.getProgress()>helper.getCaloriesToEat())
+        {
+            mCaloriesProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            mCaloriesPercent.setText("Limit exceeded.");
+        }
+    }
+
+    void initCarbsBar()
+    {
+        mCarbsText.setText("Carbs: "+helper.getAlreadyEatenCarbs()+"/"+helper.getCarbsToEat());
+        mCarbsProgress.setMax((int)(helper.getCarbsToEat()+1));
+        mCarbsProgress.setProgress((int)helper.getAlreadyEatenCarbs());
+        double percentOfEatenCarbs = (mCarbsProgress.getProgress()*100 / helper.getCarbsToEat());
+        percentOfEatenCarbs = roundDoubleUp(percentOfEatenCarbs);
+        mCarbsPercent.setText(percentOfEatenCarbs+"%");
+        if(mCarbsProgress.getProgress()>helper.getCarbsToEat())
+        {
+            mCarbsProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            mCarbsPercent.setText("Limit exceeded.");
+        }
+    }
+
+    void initFatBar()
+    {
+        mFatText.setText("Fat: "+helper.getAlreadyEatenFat()+"/"+helper.getFatToEat());
+        mFatProgress.setMax((int)(helper.getFatToEat()+1));
+        mFatProgress.setProgress((int)helper.getAlreadyEatenFat());
+        double percentOfEatenFat = (mFatProgress.getProgress()*100 / helper.getFatToEat());
+        percentOfEatenFat = roundDoubleUp(percentOfEatenFat);
+        mFatPercent.setText(percentOfEatenFat+"%");
+        if(mFatProgress.getProgress()>helper.getFatToEat())
+        {
+            mFatProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            mFatPercent.setText("Limit exceeded.");
+        }
+    }
+
+    void initProteinsBar()
+    {
+        mProteinsText.setText("Proteins: "+helper.getAlreadyEatenProteins()+"/"+helper.getProteinsToEat());
+        mProteinsProgress.setMax((int)(helper.getProteinsToEat()+1));
+        mProteinsProgress.setProgress((int)helper.getAlreadyEatenProteins());
+        double percentOfEatenProteins = (mProteinsProgress.getProgress()*100 / helper.getProteinsToEat());
+        percentOfEatenProteins = roundDoubleUp(percentOfEatenProteins);
+        mProteinsPercent.setText(percentOfEatenProteins+"%");
+        if(mProteinsProgress.getProgress()>helper.getProteinsToEat())
+        {
+            mProteinsProgress.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            mProteinsPercent.setText("Limit exceeded.");
+        }
+    }
+
+    double roundDoubleUp(double value)
+    {
+        BigDecimal i = new BigDecimal(value);
+        i = i.setScale(2, BigDecimal.ROUND_HALF_UP);
+        value = i.doubleValue();
+        return value;
     }
 }

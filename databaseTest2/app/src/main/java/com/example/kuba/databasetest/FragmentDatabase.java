@@ -40,17 +40,12 @@ public class FragmentDatabase extends Fragment
         View view = inflater.inflate(R.layout.layout_database, container, false);
         database = new DatabaseHelper(getContext()); //view.getContext
 
+        /**** inits ****/
         setHasOptionsMenu(true);
         createItemList();
-        buildRecyclerView();
-        /***** ^ *****/
-        fragmentDatabaseRecyclerView = view.findViewById(R.id.fd_recycler_view);
-        fragmentDatabaseLayoutManager = new LinearLayoutManager(getContext());
-        fragmentDatabaseAdapter = new AdapterDatabase(fragmentDatabaseItemList);
+        buildRecyclerView(view);
 
-        fragmentDatabaseRecyclerView.setLayoutManager(fragmentDatabaseLayoutManager);
-        fragmentDatabaseRecyclerView.setAdapter(fragmentDatabaseAdapter);
-
+        /**** onClicks ****/
         fragmentDatabaseAdapter.setOnItemClickListener(new AdapterDatabase.OnItemClickListener()
         {
             @Override
@@ -69,8 +64,6 @@ public class FragmentDatabase extends Fragment
             }
         });
 
-
-        /***** ______ *****/
         return view;
     }
 
@@ -105,16 +98,26 @@ public class FragmentDatabase extends Fragment
 
     }
 
-    public void buildRecyclerView()
+    public void buildRecyclerView(View view)
     {
+        fragmentDatabaseRecyclerView = view.findViewById(R.id.fd_recycler_view);
+        fragmentDatabaseLayoutManager = new LinearLayoutManager(getContext());
+        fragmentDatabaseAdapter = new AdapterDatabase(fragmentDatabaseItemList);
 
+        fragmentDatabaseRecyclerView.setLayoutManager(fragmentDatabaseLayoutManager);
+        fragmentDatabaseRecyclerView.setAdapter(fragmentDatabaseAdapter);
     }
 
     public void addToEaten(int position)
     {
         Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
+
         database.eatProduct(omnomnom);
         database.addAlreadyEatenCalories(omnomnom.getCalories());
+        database.addAlreadyEatenCarbs(omnomnom.getCarbs());
+        database.addAlreadyEatenFat(omnomnom.getFat());
+        database.addAlreadyEatenProteins(omnomnom.getProteins());
+
         Toast.makeText(getActivity(),"OMNOMNOM",Toast.LENGTH_SHORT).show();
     }
 
