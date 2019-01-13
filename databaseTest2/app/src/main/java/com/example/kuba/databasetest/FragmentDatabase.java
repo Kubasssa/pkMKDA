@@ -40,17 +40,12 @@ public class FragmentDatabase extends Fragment
         View view = inflater.inflate(R.layout.layout_database, container, false);
         database = new DatabaseHelper(getContext()); //view.getContext
 
+        /**** inits ****/
         setHasOptionsMenu(true);
         createItemList();
-        buildRecyclerView();
-        /***** ^ *****/
-        fragmentDatabaseRecyclerView = view.findViewById(R.id.fd_recycler_view);
-        fragmentDatabaseLayoutManager = new LinearLayoutManager(getContext());
-        fragmentDatabaseAdapter = new AdapterDatabase(fragmentDatabaseItemList);
+        buildRecyclerView(view);
 
-        fragmentDatabaseRecyclerView.setLayoutManager(fragmentDatabaseLayoutManager);
-        fragmentDatabaseRecyclerView.setAdapter(fragmentDatabaseAdapter);
-
+        /**** onClicks ****/
         fragmentDatabaseAdapter.setOnItemClickListener(new AdapterDatabase.OnItemClickListener()
         {
             @Override
@@ -69,8 +64,6 @@ public class FragmentDatabase extends Fragment
             }
         });
 
-
-        /***** ______ *****/
         return view;
     }
 
@@ -80,7 +73,7 @@ public class FragmentDatabase extends Fragment
         /**** may need optimalization *****/
         List<String> productNames = new ArrayList<>();
         List<String> productPortion = new ArrayList<>();
-        List<Double> productCalories = new ArrayList<>();
+        List<Integer> productCalories = new ArrayList<>();
         List<Double> productCrabs = new ArrayList<>();
         List<Double> productFat = new ArrayList<>();
         List<Double> productProteins = new ArrayList<>();
@@ -89,19 +82,11 @@ public class FragmentDatabase extends Fragment
         {
             productNames.add(x.getString(0));
             productPortion.add(x.getString(1));
-            productCalories.add(Double.parseDouble(x.getString(2)));
+            productCalories.add(Integer.parseInt(x.getString(2)));
             productCrabs.add(Double.parseDouble(x.getString(3)));
             productFat.add(Double.parseDouble(x.getString(4)));
             productProteins.add(Double.parseDouble(x.getString(5)));
         }
-
-//        System.out.println(productNames);
-//        System.out.println(productPortion);
-//        System.out.println(productCalories);
-//        System.out.println(productCrabs);
-//        System.out.println(productFat);
-//        System.out.println(productProteins);
-
 
 
         fragmentDatabaseItemList = new ArrayList<>();
@@ -113,17 +98,27 @@ public class FragmentDatabase extends Fragment
 
     }
 
-    public void buildRecyclerView()
+    public void buildRecyclerView(View view)
     {
+        fragmentDatabaseRecyclerView = view.findViewById(R.id.fd_recycler_view);
+        fragmentDatabaseLayoutManager = new LinearLayoutManager(getContext());
+        fragmentDatabaseAdapter = new AdapterDatabase(fragmentDatabaseItemList);
 
+        fragmentDatabaseRecyclerView.setLayoutManager(fragmentDatabaseLayoutManager);
+        fragmentDatabaseRecyclerView.setAdapter(fragmentDatabaseAdapter);
     }
 
     public void addToEaten(int position)
     {
-
         Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
+
         database.eatProduct(omnomnom);
-        Toast.makeText(getActivity(),"Data Inserted",Toast.LENGTH_SHORT).show();
+        database.addAlreadyEatenCalories(omnomnom.getCalories());
+        database.addAlreadyEatenCarbs(omnomnom.getCarbs());
+        database.addAlreadyEatenFat(omnomnom.getFat());
+        database.addAlreadyEatenProteins(omnomnom.getProteins());
+
+        Toast.makeText(getActivity(),"OMNOMNOM",Toast.LENGTH_SHORT).show();
     }
 
     @Override

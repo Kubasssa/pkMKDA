@@ -32,19 +32,12 @@ public class FragmentEaten extends Fragment
         View view = inflater.inflate(R.layout.layout_frag_eaten, container, false);
         database = new DatabaseHelper(view.getContext());
 
+        /***** init all *****/
         initEatenProducts();
-        initRecyclerView();
-        /***** ^ *****/
-        fragmentEatenRecyclerView = view.findViewById(R.id.fe_recycler_view); //may crash here
-        //layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager = new LinearLayoutManagerWrapper(getActivity(),LinearLayoutManager.VERTICAL,false);
-        fragmentEatenAdapter = new AdapterEaten(fragmentEatenItemList);
-        fragmentEatenRecyclerView.setLayoutManager(layoutManager);
-        fragmentEatenRecyclerView.setAdapter(fragmentEatenAdapter);
-        /***** ___ *****/
-        initButton();
-        /***** ^ *****/
-        buttonAddFromDatabase = (ImageButton)/*getActivity()*/view.findViewById(R.id.fe_button);
+        initRecyclerView(view);
+        initButton(view);
+
+        /***** onClick actions *****/
         buttonAddFromDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -54,7 +47,6 @@ public class FragmentEaten extends Fragment
                 ft.commit();
             }
         });
-        /***** ___ *****/
         fragmentEatenAdapter.setOnItemClickListener(new AdapterEaten.OnItemClickListener()
         {
             @Override
@@ -66,31 +58,35 @@ public class FragmentEaten extends Fragment
         return view;
     }
 
-    private void initRecyclerView()
+    private void initRecyclerView(View view)
     {
-
+        fragmentEatenRecyclerView = view.findViewById(R.id.fe_recycler_view); //may crash here
+        //layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManagerWrapper(getActivity(),LinearLayoutManager.VERTICAL,false);
+        fragmentEatenAdapter = new AdapterEaten(fragmentEatenItemList);
+        fragmentEatenRecyclerView.setLayoutManager(layoutManager);
+        fragmentEatenRecyclerView.setAdapter(fragmentEatenAdapter);
     }
 
-    private void initButton() {
-
+    private void initButton(View view)
+    {
+        buttonAddFromDatabase = (ImageButton)view.findViewById(R.id.fe_button);
     }
 
     private void initEatenProducts()
     {
         Cursor y = database.getAllEatenData();
-        //List<Integer> productId = new ArrayList<>();
         ArrayList<String> productNames = new ArrayList<>();
         ArrayList<String> productPortion = new ArrayList<>();
-        ArrayList<Double> productCalories = new ArrayList<>();
+        ArrayList<Integer> productCalories = new ArrayList<>();
         ArrayList<Double> productCrabs = new ArrayList<>();
         ArrayList<Double> productFat = new ArrayList<>();
         ArrayList<Double> productProteins = new ArrayList<>();
         while (y.moveToNext())
         {
-            //productId.add(Integer.parseInt(y.getString(0)));
             productNames.add(y.getString(0));
             productPortion.add(y.getString(1));
-            productCalories.add(Double.parseDouble(y.getString(2)));
+            productCalories.add(Integer.parseInt(y.getString(2)));
             productCrabs.add(Double.parseDouble(y.getString(3)));
             productFat.add(Double.parseDouble(y.getString(4)));
             productProteins.add(Double.parseDouble(y.getString(5)));
@@ -103,10 +99,16 @@ public class FragmentEaten extends Fragment
         }
     }
 
-    public void removeItem(int position) {
-        /***** crash on deleting position other than highest *****/
+    public void removeItem(int position)
+    {
         database.showShitInDatabase();
         System.out.println(position);
+
+        /***** subtract values from 'calories' table *****/
+        database.addAlreadyEatenCalories((-1)*fragmentEatenItemList.get(position).getCalories());
+        database.addAlreadyEatenCarbs((-1.0)*fragmentEatenItemList.get(position).getCarbs());
+        database.addAlreadyEatenFat((-1.0)*fragmentEatenItemList.get(position).getFat());
+        database.addAlreadyEatenProteins((-1.0)*fragmentEatenItemList.get(position).getProteins());
 
         /**** delete item from temporary array list*****/
         fragmentEatenItemList.remove(position);
@@ -115,8 +117,7 @@ public class FragmentEaten extends Fragment
         /**** delete item from database*****/
         database.deleteData(position + 1);
 
-        /**** update adapter, think might me changed to add some animations****/
-        //fragmentEatenAdapter.notifyDataSetChanged();
+        /**** update adapter****/
         fragmentEatenAdapter.notifyItemRemoved(position);
     }
 

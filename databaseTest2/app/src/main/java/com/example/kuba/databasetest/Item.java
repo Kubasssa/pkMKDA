@@ -8,7 +8,7 @@ public class Item implements Serializable
     private String mText1; //for layout_item_database_text_top_id
     private String mText2; //for layout_item_database_text_bottom_id
 
-    private double mCalories;
+    private int mCalories;
     private double mCarbs;
     private double mFat;
     private double mProteins;
@@ -29,7 +29,7 @@ public class Item implements Serializable
         mText2 = text2;
     }
 
-    public Item(String text1, String text2, double Calories, double Carbs, double Fat, double Proteins)
+    public Item(String text1, String text2, int Calories, double Carbs, double Fat, double Proteins)
     {
         mText1 = text1;
         mText2 = text2;
@@ -49,7 +49,7 @@ public class Item implements Serializable
         return mText2;
     }
 
-    public double getCalories()
+    public int getCalories()
     {
         return mCalories;
     }
