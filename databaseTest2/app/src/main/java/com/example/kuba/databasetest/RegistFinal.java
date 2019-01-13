@@ -33,7 +33,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.regist_final);
+        setContentView(R.layout.layout_registration);
 
         helper = new DatabaseHelper(getApplicationContext());
 

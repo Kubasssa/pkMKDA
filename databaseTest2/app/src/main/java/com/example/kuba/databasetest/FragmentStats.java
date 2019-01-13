@@ -43,7 +43,7 @@ public class FragmentStats extends Fragment
         initLayoutItems(view);
 
         helper = new DatabaseHelper(view.getContext());
-        System.out.println(helper.getAlreadyEatenCalories());  //tu 0 wywala
+       // System.out.println(helper.getAlreadyEatenCalories());  //tu 0 wywala @Antek i będzie wywalać, bo źle funkcja napisana xd
         mCaloriesProgress.setMax(helper.getSumOfCalories());
 
         mCaloriesProgress.setProgress(1116);
@@ -58,7 +58,7 @@ public class FragmentStats extends Fragment
             mCaloriesPercent.setText("Limit exceeded.");
         }
 
-        mCaloriesText.setText("Calories:"+helper.getSumOfCalories());
+        mCaloriesText.setText("Calories: "+helper.getSumOfCalories());
 
         return view;
     }

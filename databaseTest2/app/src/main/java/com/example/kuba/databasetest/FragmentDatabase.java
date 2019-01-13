@@ -95,14 +95,6 @@ public class FragmentDatabase extends Fragment
             productProteins.add(Double.parseDouble(x.getString(5)));
         }
 
-//        System.out.println(productNames);
-//        System.out.println(productPortion);
-//        System.out.println(productCalories);
-//        System.out.println(productCrabs);
-//        System.out.println(productFat);
-//        System.out.println(productProteins);
-
-
 
         fragmentDatabaseItemList = new ArrayList<>();
         for (int i=0;i<(productNames.size());i++)
@@ -120,11 +112,10 @@ public class FragmentDatabase extends Fragment
 
     public void addToEaten(int position)
     {
-
         Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
         database.eatProduct(omnomnom);
         database.addAlreadyEatenCalories(omnomnom.getCalories());
-        Toast.makeText(getActivity(),"Data Inserted",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(),"OMNOMNOM",Toast.LENGTH_SHORT).show();
     }
 
     @Override

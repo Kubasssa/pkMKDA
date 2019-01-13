@@ -9,39 +9,31 @@ import java.util.ArrayList
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
-    companion object {
+    companion object
+    {
+        const val DATABASE_NAME = "foodEmperor"
+        const val DATABASE_VERSION = 1
 
+        const val TABLE_NAME = "user"
+        const val FOOD_TAB = "Products"
+        const val EATEN_TAB = "EatenProducts"
+        const val CALORIES_TAB = "Calories"
 
+        const val COL_1 = "userId"
+        const val COL_2 = "login"
+        const val COL_3 = "password"
+        const val COL_4 = "sex"
 
-        val DATABASE_NAME = "foodEmperor"
-        val DATABASE_VERSION = 1
-
-        val TABLE_NAME = "user"
-        val FOOD_TAB = "Products"
-        val EATEN_TAB = "EatenProducts"
-        val CALORIES_TAB = "Calories"
-
-        val COL_1 = "userId"
-        val COL_2 = "login"
-        val COL_3 = "password"
-        val COL_4 = "sex"
-
-        val FOOD_ID = "ProductsId"
-        val FOOD_NAME = "name"
-        val FOOD_TYPE = "type"
-        val FOOD_CALORIES = "calories"
-
-        val COL_5 = "amountOfCaloriesToEat"
-        val COL_6 = "CaloriesAlreadyEaten"
-
+        const val COL_5 = "amountOfCaloriesToEat"
+        const val COL_6 = "CaloriesAlreadyEaten"
     }
 
     override fun onCreate(db: SQLiteDatabase?)
     {
-        db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login STRING, password TEXT, sex TEXT)")
+        db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(ID INTEGER PRIMARY KEY AUTOINCREMENT , login TEXT, password TEXT, sex TEXT)")
         db.execSQL("CREATE TABLE IF NOT EXISTS $FOOD_TAB(foodId INTEGER PRIMARY KEY AUTOINCREMENT , foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories DOUBLE NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
         db.execSQL("CREATE TABLE IF NOT EXISTS $EATEN_TAB(foodId INTEGER PRIMARY KEY, foodName TEXT NOT NULL, foodPortion TEXT NOT NULL, foodCalories int NOT NULL, foodCrabs DOUBLE NOT NULL, foodFat DOUBLE NOT NULL, foodProteins DOUBLE NOT NULL) ")
-        db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT, amountOfCaloriesToEat int, CaloriesAlreadyEaten int) ")
+        db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(caloriesId INTEGER PRIMARY KEY AUTOINCREMENT, amountOfCaloriesToEat INTEGER, CaloriesAlreadyEaten INTEGER) ")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -61,20 +53,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return !res.equals(-1)
     }
 
-    fun insertFoodData(name: String, type: String, calories: Int): Boolean? {
-
-        val db = this.writableDatabase
-        val cv = ContentValues()
-        cv.put(FOOD_NAME, name)
-        cv.put(FOOD_TYPE, type)
-        cv.put(FOOD_CALORIES, calories)
-
-        val res = db!!.insert(FOOD_TAB, null, cv)
-        db.close()
-
-        return !res.equals(-1)
-    }
-
     fun getAllData(): Cursor {
 
         val db = this.writableDatabase
@@ -83,7 +61,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun showShitInDatabase()
-    { /***** prints foodId and foodName from food_eaten table*****/
+    { /***** prints foodId and foodName from food_eaten table - used in debugging*****/
         val db = this.readableDatabase
         var e = ArrayList<String>()
         val d = db.rawQuery("SELECT * FROM $EATEN_TAB", null)
@@ -111,25 +89,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db!!.rawQuery("SELECT foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins FROM $EATEN_TAB", null)
     }
 
-
-    fun updateData(id: String, login: String, password: String, sex: String): Boolean? {
-        val db = this.writableDatabase
-        val cv = ContentValues()
-        cv.put(COL_1, id)
-        cv.put(COL_2, login)
-        cv.put(COL_3, password)
-        cv.put(COL_4, sex)
-
-        db.update(TABLE_NAME, cv, "userId=?", arrayOf(id))
-        return true
-    }
-
-    fun deleteData(id: String) {
-        val db = this.writableDatabase
-        db.delete(TABLE_NAME, "ID=?", arrayOf(id))
-        db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME + "'");
-
-    }
 
     fun deleteData(id: Int) {
         val db = this.writableDatabase
@@ -207,14 +166,25 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             return e.get(0)
     }
 
-        //-----------------------nie działa!!. sout(getAlreadyEatenCalories) wywala 0. Pomimo tego że przed wykonaniem funkci
-        // ----------------------sout (omnomnom.getCalories()) dobrze pokazuje kalorie. Coś chyba z baza nie tak znowu xddd
-    fun getAlreadyEatenCalories():Int{
+    fun getAlreadyEatenCalories():Int
+        {
         val db = this.readableDatabase
         val tmp = db.rawQuery("SELECT CaloriesAlreadyEaten FROM $CALORIES_TAB",null)
 
         var e = ArrayList<Int>()
-        while(tmp.moveToNext()) {e.add(tmp.getInt(0))}
+        while(tmp.moveToNext())
+        {
+            e.add(tmp.getInt(0))
+        }
+
+            if(e.size>0)
+            {
+                for (i in 0..e.size-1)
+                {
+                    println(e.get(i))
+                }
+            }
+
         if (e.get(0) == 0 || e.get(0) == null)
             return 0
         else
@@ -228,8 +198,44 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cv.put(COL_6, cal)
 
         val res = db.insert(CALORIES_TAB, null, cv)
-        db.close()
         return res.toInt()
     }
 
 }
+
+
+/***** unused methods *****/
+
+
+//
+//fun updateData(id: String, login: String, password: String, sex: String): Boolean? {
+//    val db = this.writableDatabase
+//    val cv = ContentValues()
+//    cv.put(COL_1, id)
+//    cv.put(COL_2, login)
+//    cv.put(COL_3, password)
+//    cv.put(COL_4, sex)
+//
+//    db.update(TABLE_NAME, cv, "userId=?", arrayOf(id))
+//    return true
+//}
+//
+//fun deleteData(id: String) {
+//    val db = this.writableDatabase
+//    db.delete(TABLE_NAME, "ID=?", arrayOf(id))
+//    db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME + "'");
+//
+//}
+//    fun insertFoodData(name: String, type: String, calories: Int): Boolean? {
+//
+//        val db = this.writableDatabase
+//        val cv = ContentValues()
+//        cv.put(FOOD_NAME, name)
+//        cv.put(FOOD_TYPE, type)
+//        cv.put(FOOD_CALORIES, calories)
+//
+//        val res = db!!.insert(FOOD_TAB, null, cv)
+//        db.close()
+//
+//        return !res.equals(-1)
+//    }
