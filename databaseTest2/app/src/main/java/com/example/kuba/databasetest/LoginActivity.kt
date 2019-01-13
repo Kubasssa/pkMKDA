@@ -3,6 +3,7 @@ package com.example.kuba.databasetest
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -17,6 +18,9 @@ class LoginActivity : AppCompatActivity() {
     lateinit var LoginButton: Button
     lateinit var LoginLog: EditText
     lateinit var PasswordLog: EditText
+    lateinit var ViewAllUser: Button
+    lateinit var myDb: DatabaseHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +30,12 @@ class LoginActivity : AppCompatActivity() {
         LoginButton=findViewById(R.id.loginButton)
         LoginLog=findViewById(R.id.loginLog)
         PasswordLog=findViewById(R.id.passwordLog)
-
+        ViewAllUser=findViewById(R.id.viewAllUser)
+        myDb = DatabaseHelper(this)
 
         goRegist()
         logIn()
+        viewAllData()
     }
 
     fun goRegist(){
@@ -44,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
     fun logIn (){
         LoginButton.setOnClickListener(View.OnClickListener {
             var userExist: Boolean =false
-            val myDb = DatabaseHelper(this)
             val res = myDb.getAllData()
 
             if(res.getCount()==0){
@@ -68,4 +73,38 @@ class LoginActivity : AppCompatActivity() {
             }
         })
     }
+
+    fun viewAllData(){
+
+        ViewAllUser.setOnClickListener(View.OnClickListener{
+            val res = myDb.getAllData()
+
+            if(res.getCount()==0){
+
+                return@OnClickListener
+            }else{
+                val buffer = StringBuffer()
+                while (res.moveToNext()){
+                    buffer.append("id:"+res.getString(0)+"\n")
+                    buffer.append("login:"+res.getString(1)+"\n")
+                    buffer.append("paasword:"+res.getString(2)+"\n")
+                    buffer.append("sex:"+res.getString(3)+"\n\n")
+                }
+
+                showMessage("Data", buffer.toString())
+                res.close()
+            }
+        })
+    }
+
+    private fun showMessage(title: String, message: String?) {
+
+        val builder = AlertDialog.Builder(this)
+        builder.create()
+        builder.setCancelable(true)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.show()
+    }
+
 }

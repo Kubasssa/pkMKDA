@@ -1,6 +1,7 @@
 package com.example.kuba.databasetest;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
     String sex,login,password,temp;
     TextView diffInput;
     Double diffInputValue = 0.0;
+    boolean ifUserExist;
 
     EditText ageInput, weightInput, heightInput,nameInput, passwordInput;
     Button addButton,button,button2;
@@ -99,45 +101,66 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                 password = passwordInput.getText().toString().trim();
                 diff=diffInputValue;
 
+                Cursor allData = helper.getAllData();
 
+                while (allData.moveToNext()){
+                    System.out.println(allData.getString(1));
+                    System.out.println(login);
+                    if(login.equals(allData.getString(1))){
+                        Toast.makeText(getApplicationContext(),"This Login already exist",Toast.LENGTH_SHORT).show();
+                        ifUserExist = true;
 
-                if(temp.equals("Nikła-siedzący tryb życia")){activity=1.2; }
-                else if(temp.equals("Mała-1-2 razy w tygodniu trening")){activity=1.35;}
-                else if(temp.equals("Średnia-3-4 razy w tygodniu trening")){activity=1.55;}
-                else if(temp.equals("Duża-3-4 razy w tygodniu trening/ praca fizyczna")){activity=1.75;}
-                else if(temp.equals("Bardzo duża-zawodowni sportowcy/ trening codziennie")){activity=2.1;}
-
-
-                if(sex.equals("Kobieta")){
-                    kcal=(((665+(9.6*weight)+(1.8*height)-(4.7*age)))*activity)-(233.3*diff);
-                    kcalInt = kcal.intValue();
-                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcalInt);
-
-                    helper.addTotalCaloriesToEat(kcalInt);
-                    boolean isInserted = helper.insertUserData(login, password,sex);
-
-                    if(isInserted==true){
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
                     }else{
-                        showToast("jeblo cos ");
-                      //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
+                        System.out.println("jeblo cos");
+                        ifUserExist = false;
                     }
                 }
-                else if(sex.equals("Mężczyzna")){
-                    kcal=(((66+(13.7*weight)+(5*height)-(6.76*age)))*activity)-(233.3*diff);
-                    kcalInt = kcal.intValue();
-                    showToast("Zapotrzebowanie kaloryczne wynosi: "+kcalInt);
 
-                    helper.addTotalCaloriesToEat(kcalInt);
-                    boolean isInserted = helper.insertUserData(login, password,sex);
+                if(!ifUserExist) {
 
-                    if(isInserted==true){
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                    }else{
-                        showToast("jeblo cos ");
-                        //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
+                    if (temp.equals("Nikła-siedzący tryb życia")) {
+                        activity = 1.2;
+                    } else if (temp.equals("Mała-1-2 razy w tygodniu trening")) {
+                        activity = 1.35;
+                    } else if (temp.equals("Średnia-3-4 razy w tygodniu trening")) {
+                        activity = 1.55;
+                    } else if (temp.equals("Duża-3-4 razy w tygodniu trening/ praca fizyczna")) {
+                        activity = 1.75;
+                    } else if (temp.equals("Bardzo duża-zawodowni sportowcy/ trening codziennie")) {
+                        activity = 2.1;
+                    }
+
+
+                    if (sex.equals("Kobieta")) {
+                        kcal = (((665 + (9.6 * weight) + (1.8 * height) - (4.7 * age))) * activity) + (233.3 * diff);
+                        kcalInt = kcal.intValue();
+                        showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
+
+                        helper.addTotalCaloriesToEat(kcalInt);
+                        boolean isInserted = helper.insertUserData(login, password, sex);
+
+                        if (isInserted == true) {
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            showToast("jeblo cos ");
+                            //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
+                        }
+                    } else if (sex.equals("Mężczyzna")) {
+                        kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) - (233.3 * diff);
+                        kcalInt = kcal.intValue();
+                        showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
+
+                        helper.addTotalCaloriesToEat(kcalInt);
+                        boolean isInserted = helper.insertUserData(login, password, sex);
+
+                        if (isInserted == true) {
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+                            showToast("jeblo cos ");
+                            //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
