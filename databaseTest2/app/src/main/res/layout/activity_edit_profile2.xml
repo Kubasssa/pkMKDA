@@ -40,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
-                android:hint="Podaj obecną wagę."
+                android:hint="Actual weight"
                 android:inputType="number"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="81dp"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
-                android:hint="Podaj wzrost [cm]."
+                android:hint="Actual height [cm]."
                 android:inputType="number"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="72dp"
@@ -71,7 +71,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="15dp"
                 android:paddingLeft="5dp"
-                android:text="Podaj twoją aktywność:"
+                android:text="Your Activity:"
                 android:textSize="13sp" />
 
             <Spinner
@@ -93,7 +93,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
-                android:text="Jak ma się zmienić twoja waga na przestrzeni miesiąca:"
+                android:text="How do you want to change yout weight over a month:"
                 android:textSize="13sp" />
 
             <TableRow

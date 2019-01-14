@@ -88,8 +88,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
 
         /***** test user *****/
-        db.execSQL("INSERT INTO $TABLE_NAME (login, password, sex) VALUES ('a','a','kobieta')")
-        db.execSQL("INSERT INTO $PROFILE_TAB (sex, height, age) VALUES ('Kobieta','160','25')")
+        db.execSQL("INSERT INTO $TABLE_NAME (login, password, sex) VALUES ('a','a','Female')")
+        db.execSQL("INSERT INTO $PROFILE_TAB (sex, height, age) VALUES ('Female','160','25')")
         db.execSQL("INSERT INTO $CALORIES_TAB (" +
                 "caloriesId, " +
                 "amountOfCaloriesToEat, " +

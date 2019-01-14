@@ -118,23 +118,23 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
                 if(!ifUserExist) {
 
-                    if (temp.equals("Nikła-siedzący tryb życia")) {
+                    if (temp.equals("Very Low-sedentary lifestyle")) {
                         activity = 1.2;
-                    } else if (temp.equals("Mała-1-2 razy w tygodniu trening")) {
+                    } else if (temp.equals("Low-training 1-2 times a week")) {
                         activity = 1.35;
-                    } else if (temp.equals("Średnia-3-4 razy w tygodniu trening")) {
+                    } else if (temp.equals("Average-training 3-4 times a week")) {
                         activity = 1.55;
-                    } else if (temp.equals("Duża-3-4 razy w tygodniu trening/ praca fizyczna")) {
+                    } else if (temp.equals("Large-training 3-4 times a week / physical work")) {
                         activity = 1.75;
-                    } else if (temp.equals("Bardzo duża-zawodowni sportowcy/ trening codziennie")) {
+                    } else if (temp.equals("Very large-competitive athletes / training every day")) {
                         activity = 2.1;
                     }
 
 
-                    if (sex.equals("Kobieta")) {
+                    if (sex.equals("Female")) {
                         kcal = (((665 + (9.6 * weight) + (1.8 * height) - (4.7 * age))) * activity) + (233.3 * diff);
                         kcalInt = kcal.intValue();
-                        showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
+                        showToast("The caloric demand is: " + kcalInt);
 
                         helper.addTotalCaloriesToEat(kcalInt);
                         boolean isInserted = helper.insertUserData(login, password, sex);
@@ -147,10 +147,10 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                             showToast("jeblo cos ");
                             //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
                         }
-                    } else if (sex.equals("Mężczyzna")) {
+                    } else if (sex.equals("Male")) {
                         kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) - (233.3 * diff);
                         kcalInt = kcal.intValue();
-                        showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
+                        showToast("The caloric demand is:  " + kcalInt);
 
                         helper.addTotalCaloriesToEat(kcalInt);
                         boolean isInserted = helper.insertUserData(login, password, sex);

@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:text="Zostań FitFreakiem!"
+                android:text="Become FitFreak!"
                 android:textAlignment="center"
                 android:textSize="30sp" />
 
@@ -36,21 +36,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj imie:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/nameInput"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:hint="Login"/>
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj hasło:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
 
             <EditText
@@ -58,13 +61,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:hint="Password"/>
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="Wybierz płeć"
+                android:text="Choose sex"
                 android:textSize="13sp" />
 
             <Spinner
@@ -84,7 +88,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj obecną wagę(kg):"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
 
             <EditText
@@ -92,6 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
+                android:hint="Actual weight"
                 android:inputType="number"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="81dp"
@@ -102,7 +108,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj wzrost(cm):"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/heightInput"
@@ -112,14 +119,16 @@
                 android:inputType="number"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="72dp"
-                tools:layout_editor_absoluteY="121dp" />
+                tools:layout_editor_absoluteY="121dp"
+                android:hint="Actual height"/>
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj wiek:"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/ageInput"
@@ -129,14 +138,15 @@
                 android:inputType="number"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="72dp"
-                tools:layout_editor_absoluteY="167dp" />
+                tools:layout_editor_absoluteY="167dp"
+                android:hint="Age"/>
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="5dp"
-                android:text="Podaj twoją aktywność:"
+                android:text="Your Activity:"
                 android:textSize="13sp" />
 
             <Spinner
@@ -156,7 +166,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginLeft="5dp"
-                android:text="Jak ma się zmienić twoja waga na przestrzeni miesiąca:"
+                android:text="How do you want to change yout weight over a month:"
                 android:textSize="13sp" />
 
             <TableRow
@@ -165,15 +175,18 @@
 
                 <Button
                     android:id="@+id/button"
-                    android:layout_width="115dp"
+                    android:layout_width="60dp"
                     android:layout_height="44dp"
+                    android:layout_marginLeft="50dp"
+                    android:background="@drawable/back_button"
                     android:text="-"
+                    android:textColor="@android:color/white"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="454dp" />
 
                 <TextView
                     android:id="@+id/diffInput"
-                    android:layout_width="150dp"
+                    android:layout_width="50dp"
                     android:layout_height="44dp"
                     android:text="0"
                     android:textAlignment="center"
@@ -183,9 +196,12 @@
 
                 <Button
                     android:id="@+id/button2"
-                    android:layout_width="115dp"
+                    android:layout_width="60dp"
                     android:layout_height="44dp"
+                    android:layout_marginRight="50dp"
+                    android:background="@drawable/back_button"
                     android:text="+"
+                    android:textColor="@android:color/white"
                     tools:layout_editor_absoluteX="280dp"
                     tools:layout_editor_absoluteY="454dp" />
 
@@ -195,7 +211,10 @@
                 android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="dodaj"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/remove_button"
+                android:text="Add"
+                android:textColor="@android:color/white"
                 tools:layout_editor_absoluteX="56dp"
                 tools:layout_editor_absoluteY="360dp" />
 
