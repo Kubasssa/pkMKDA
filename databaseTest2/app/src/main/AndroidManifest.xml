@@ -2,11 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kuba.databasetest">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="FitFreak"
-        android:name=".MyApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -20,10 +22,11 @@
         <activity android:name=".MainMenu" />
         <activity android:name=".RegView" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegistFinal"/>
+        <activity android:name=".RegistFinal" />
+        <activity android:name=".EditProfile" />
         <activity
             android:name=".addFood"
-            android:label="@string/title_activity_add_food"></activity>
+            android:label="@string/title_activity_add_food" />
     </application>
 
 </manifest>

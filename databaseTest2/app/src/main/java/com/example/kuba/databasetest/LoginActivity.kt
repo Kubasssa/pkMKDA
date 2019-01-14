@@ -1,8 +1,10 @@
 package com.example.kuba.databasetest
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Vibrator
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Button
@@ -43,12 +45,18 @@ class LoginActivity : AppCompatActivity() {
 
             val Intent = Intent(this,RegistFinal::class.java)
             startActivity(Intent);
+            val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vb.vibrate(20)
             return@OnClickListener
+
         })
     }
 
     fun logIn (){
         LoginButton.setOnClickListener(View.OnClickListener {
+            val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            vb.vibrate(20)
+
             var userExist: Boolean =false
             val res = myDb.getAllData()
 

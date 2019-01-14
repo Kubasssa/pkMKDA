@@ -1,9 +1,12 @@
 package com.example.kuba.databasetest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RegistFinal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class EditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     Float age;
@@ -24,10 +27,10 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
     String sex,login,password,temp;
     TextView diffInput;
     Double diffInputValue = 0.0;
-    boolean ifUserExist;
+    boolean ifUserExist, isInserted = true,isInserted2 =true;
 
     EditText ageInput, weightInput, heightInput,nameInput, passwordInput;
-    Button addButton,button,button2;
+    Button addButton,button,button2, BackButton;
 
     DatabaseHelper helper;
 
@@ -35,7 +38,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_registration);
+        setContentView(R.layout.activity_edit_profile2);
 
         helper = new DatabaseHelper(getApplicationContext());
 
@@ -45,23 +48,13 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        final Spinner spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.płeć, android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner2.setAdapter(adapter2);
-        spinner2.setOnItemSelectedListener(this);
-
-        ageInput = (EditText) findViewById(R.id.ageInput);
-
         weightInput = (EditText) findViewById(R.id.weightInput);
         heightInput = (EditText) findViewById(R.id.heightInput);
         addButton = (Button) findViewById(R.id.add);
         button = (Button) findViewById(R.id.button);
         button2 = (Button) findViewById(R.id.button2);
         diffInput = (TextView) findViewById(R.id.diffInput);
-        nameInput = (EditText) findViewById(R.id.nameInput);
-        passwordInput = (EditText) findViewById(R.id.surnameInput);
-
+        BackButton = (Button) findViewById(R.id.backButton);
 
         //init value of diffInput
         diffInput.setText(String.format("%.1f",diffInputValue));
@@ -74,6 +67,9 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                 diffInputValue -= 0.1;
 
                 diffInput.setText(String.format("%.1f",diffInputValue));
+
+                Vibrator vb = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(3);
             }
         });
 
@@ -86,37 +82,54 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                 diffInputValue += 0.1;
                 diffInput.setText(String.format("%.1f",diffInputValue));
 
+                Vibrator vb = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(3);
+
+            }
+        });
+
+
+        BackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+
             }
         });
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                age = Float.valueOf(ageInput.getText().toString());
-                height = Float.valueOf(heightInput.getText().toString());
-                weight = Float.valueOf(weightInput.getText().toString());
-                sex = spinner2.getSelectedItem().toString().trim();
                 temp = spinner.getSelectedItem().toString();
-                login = nameInput.getText().toString().trim();
-                password = passwordInput.getText().toString().trim();
                 diff=diffInputValue;
 
-                Cursor allData = helper.getAllData();
-
-                while (allData.moveToNext()){
-                    System.out.println(allData.getString(1));
-                    System.out.println(login);
-                    if(login.equals(allData.getString(1))){
-                        Toast.makeText(getApplicationContext(),"This Login already exist",Toast.LENGTH_SHORT).show();
-                        ifUserExist = true;
-
-                    }else{
-                        System.out.println("jeblo cos");
-                        ifUserExist = false;
-                    }
+                if(TextUtils.isEmpty(weightInput.getText().toString())){
+                    isInserted = false;
+                }else {
+                    weight = Float.valueOf(weightInput.getText().toString());
+                    isInserted = true;
                 }
 
-                if(!ifUserExist) {
+                if(TextUtils.isEmpty(heightInput.getText().toString())){
+                    isInserted2 = false;
+
+                }else {
+                    height = Float.valueOf(heightInput.getText().toString());
+                    isInserted2 = true;
+                }
+
+                if(isInserted && isInserted2) {
+
+                    Cursor allData = helper.getProfileSettings();
+
+                    while (allData.moveToNext()) {
+                        System.out.println(allData.getString(1));
+
+                        sex = allData.getString(1);
+                        height = allData.getFloat(2);
+                        age = allData.getFloat(3);
+                    }
 
                     if (temp.equals("Nikła-siedzący tryb życia")) {
                         activity = 1.2;
@@ -136,34 +149,19 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                         kcalInt = kcal.intValue();
                         showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
 
-                        helper.addTotalCaloriesToEat(kcalInt);
-                        boolean isInserted = helper.insertUserData(login, password, sex);
+                            helper.updateTotalCalories(kcalInt);
+                            showToast("Zedytowano pomyślnie");
 
-                        if (isInserted == true) {
-                            helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                        } else {
-                            showToast("jeblo cos ");
-                            //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
-                        }
                     } else if (sex.equals("Mężczyzna")) {
                         kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) - (233.3 * diff);
                         kcalInt = kcal.intValue();
-                        showToast("Zapotrzebowanie kaloryczne wynosi: " + kcalInt);
+                        showToast("zapotrzebowanie kaloryczne wynosi: " + kcalInt);
 
-                        helper.addTotalCaloriesToEat(kcalInt);
-                        boolean isInserted = helper.insertUserData(login, password, sex);
-
-                        if (isInserted == true) {
-                            helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                        } else {
-                            showToast("jeblo cos ");
-                            //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
-                        }
+                            helper.updateTotalCalories(kcalInt);
+                            showToast("Zedytowano pomyślnie");
                     }
+                }else{
+                    showToast("Podaj wszystkie dane");
                 }
             }
         });
@@ -180,6 +178,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
     }
     private void showToast(String text){
-        Toast.makeText(RegistFinal.this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(EditProfile.this,text,Toast.LENGTH_SHORT).show();
     }
 }
+

@@ -28,6 +28,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         /** 'EatenProducts' table**/
         const val EATEN_TAB = "EatenProducts"
 
+        /** 'Profile settings (sex, height, weight)' table**/
+        const val PROFILE_TAB = "ProfileSettings"
+        const val COL_7 = "sex"
+        const val COL_8 = "height"
+        const val COL_9 = "age"
+
         /** 'Calories' table**/
         const val CALORIES_TAB = "Calories"
         const val COL_5 = "amountOfCaloriesToEat"
@@ -62,6 +68,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "foodFat DOUBLE NOT NULL, " +
                 "foodProteins DOUBLE NOT NULL) ")
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS $PROFILE_TAB(" +
+                "profile INTEGER PRIMARY KEY, " +
+                "sex TEXT NOT NULL, " +
+                "height INTEGER NOT NULL, " +
+                "age INTEGER NOT NULL) " )
+
+
         db.execSQL("CREATE TABLE IF NOT EXISTS $CALORIES_TAB(" +
                 "caloriesId INTEGER PRIMARY KEY, " +
                 "amountOfCaloriesToEat INTEGER, " +
@@ -76,6 +89,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         /***** test user *****/
         db.execSQL("INSERT INTO $TABLE_NAME (login, password, sex) VALUES ('a','a','kobieta')")
+        db.execSQL("INSERT INTO $PROFILE_TAB (sex, height, age) VALUES ('Kobieta','160','25')")
         db.execSQL("INSERT INTO $CALORIES_TAB (" +
                 "caloriesId, " +
                 "amountOfCaloriesToEat, " +
@@ -192,6 +206,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             return e.get(0)
     }
 
+    fun insertProfileSettings(sex: String, height: Int, age: Int): Boolean? {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+        cv.put(COL_7, sex)
+        cv.put(COL_8, height)
+        cv.put(COL_9, age)
+        val res = db.insert(PROFILE_TAB, null, cv)
+        return !res.equals(-1)
+    }
+
+    fun getProfileSettings(): Cursor {
+        val db = this.writableDatabase
+        return db.rawQuery("SELECT * FROM $PROFILE_TAB", null)
+
+    }
+
     fun addTotalCaloriesToEat( cal: Int): Int {
         val db = this.writableDatabase
 
@@ -201,7 +231,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val res = db.insert(CALORIES_TAB, null, cv)
         db.close()
         return res.toInt()
+    }
 
+    fun updateTotalCalories( cal: Int){
+        val db = this.writableDatabase
+        db.execSQL("UPDATE $CALORIES_TAB SET amountOfCaloriesToEat = '" + cal + "'")
     }
 
     fun getCaloriesToEat():Int{

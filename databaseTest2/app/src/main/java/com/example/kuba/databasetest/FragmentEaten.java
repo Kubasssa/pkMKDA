@@ -1,7 +1,9 @@
 package com.example.kuba.databasetest;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +11,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.util.ArrayList;
@@ -22,7 +26,7 @@ public class FragmentEaten extends Fragment
     private RecyclerView fragmentEatenRecyclerView;
     private AdapterEaten fragmentEatenAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ImageButton buttonAddFromDatabase;
+    private Button buttonAddFromDatabase;
     DatabaseHelper database;
 
     @Nullable
@@ -45,6 +49,9 @@ public class FragmentEaten extends Fragment
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.ma_fragment_container, new FragmentDatabase());
                 ft.commit();
+                Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(10);
+
             }
         });
         fragmentEatenAdapter.setOnItemClickListener(new AdapterEaten.OnItemClickListener()
@@ -70,7 +77,7 @@ public class FragmentEaten extends Fragment
 
     private void initButton(View view)
     {
-        buttonAddFromDatabase = (ImageButton)view.findViewById(R.id.fe_button);
+        buttonAddFromDatabase = (Button)view.findViewById(R.id.addButton);
     }
 
     private void initEatenProducts()

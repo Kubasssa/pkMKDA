@@ -4,28 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:background="#009876"
-    android:padding="5dp">
-
-    <ImageButton
-        android:id="@+id/fe_button"
-        android:background="#3CB371"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="24dp"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+    android:padding="5dp"
+    tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fe_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
         android:layout_marginLeft="24dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/removeAllButton"
+        android:layout_width="193dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fe_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="-2dp"
+        android:layout_toEndOf="@+id/addButton"
+        android:background="@drawable/remove_button"
+        android:text="Remove All"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        android:background="@drawable/remove_button"
+        android:text="Add"
+        android:textColor="@android:color/white" />
 </RelativeLayout>
+

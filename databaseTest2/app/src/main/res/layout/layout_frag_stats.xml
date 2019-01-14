@@ -9,105 +9,116 @@
 
     <TextView
         android:id="@+id/text_calories"
-        android:text="TEXT"
         android:layout_width="wrap_content"
-        android:layout_height="20dp"/>
+        android:layout_height="20dp"
+        android:text="TEXT" />
 
     <ProgressBar
         android:id="@+id/progress_calories"
         style="@style/CustomProgressBar"
-        android:layout_centerHorizontal="true"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_calories"/>
+        android:layout_below="@id/text_calories"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/procent_calories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/progress_calories"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/progress_calories"
         android:text="0%" />
 
     <!-- carbs bar-->
 
     <TextView
         android:id="@+id/text_carbs"
-        android:text="TEXT"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="70dp"
+        android:text="TEXT" />
 
     <ProgressBar
         android:id="@+id/progress_carbs"
         style="@style/CustomProgressBar"
-        android:layout_centerHorizontal="true"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_carbs"/>
+        android:layout_below="@id/text_carbs"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/procent_carbs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/progress_carbs"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="85dp"
+        android:layout_toEndOf="@id/progress_carbs"
         android:text="0%" />
 
     <!-- fat bar-->
 
     <TextView
         android:id="@+id/text_fat"
-        android:text="TEXT"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginTop="140dp"/>
+        android:layout_marginTop="140dp"
+        android:text="TEXT" />
 
     <ProgressBar
         android:id="@+id/progress_fat"
         style="@style/CustomProgressBar"
-        android:layout_centerHorizontal="true"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_fat"/>
+        android:layout_below="@id/text_fat"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/procent_fat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/progress_fat"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="155dp"
+        android:layout_toEndOf="@id/progress_fat"
         android:text="0%" />
 
     <!-- protein bar-->
 
     <TextView
         android:id="@+id/text_protein"
-        android:text="TEXT"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginTop="210dp"/>
+        android:layout_marginTop="210dp"
+        android:text="TEXT" />
 
     <ProgressBar
         android:id="@+id/progress_protein"
         style="@style/CustomProgressBar"
-        android:layout_centerHorizontal="true"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_protein"/>
+        android:layout_below="@id/text_protein"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/procent_protein"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/progress_protein"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="225dp"
+        android:layout_toEndOf="@id/progress_protein"
         android:text="0%" />
 
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/back_button"
+        android:text="Edit Profile"
+        android:textColor="@android:color/white" />
 
 
 

@@ -19,4 +19,5 @@
         <item>Kobieta</item>
         <item>Mężczyzna</item>
     </string-array>
+    <string name="title_activity_edit_profile2">EditProfile2</string>
 </resources>

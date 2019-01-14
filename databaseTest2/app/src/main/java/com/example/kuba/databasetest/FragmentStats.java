@@ -1,13 +1,17 @@
 package com.example.kuba.databasetest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +31,7 @@ public class FragmentStats extends Fragment
     TextView mCarbsPercent;
     TextView mFatPercent;
     TextView mProteinsPercent;
+    Button editButton;
 
     DatabaseHelper helper;
 
@@ -35,7 +40,7 @@ public class FragmentStats extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.layout_frag_stats, container, false);
+        final View view = inflater.inflate(R.layout.layout_frag_stats, container, false);
 
         /** init database and layout items**/
         initDatabse(view);
@@ -46,6 +51,17 @@ public class FragmentStats extends Fragment
         initCarbsBar();
         initFatBar();
         initProteinsBar();
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(10);
+                Intent intent = new Intent(view.getContext(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -72,6 +88,8 @@ public class FragmentStats extends Fragment
         mProteinsProgress = view.findViewById(R.id.progress_protein);
         mProteinsText = view.findViewById(R.id.text_protein);
         mProteinsPercent = view.findViewById(R.id.procent_protein);
+
+        editButton =  view.findViewById(R.id.edit_button);
     }
 
     void initCaloriesBar()
@@ -141,4 +159,6 @@ public class FragmentStats extends Fragment
         value = i.doubleValue();
         return value;
     }
+
+
 }

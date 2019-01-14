@@ -17,12 +17,12 @@
 
     <ImageButton
         android:id="@+id/btn_back_to_database"
-        android:layout_width="500px"
-        android:layout_height="wrap_content"
+        android:layout_width="700px"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="77dp"
-        android:background="#2d8659"
+        android:background="#2B6658"
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <!--ImageButton
