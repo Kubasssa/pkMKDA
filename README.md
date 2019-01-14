@@ -3,6 +3,7 @@ Projekt kompetencyjny.
 # TODO
   - ~~Połączyć dane z progress barami~~
   - ~~Poprawić kalkulator żywnościowy: chce przybać +/- na wadzę, prawdopodobnie trzeba zamienić znaki w algorytmie~~
+  - FragemntEditProfile -> oprócz kalorii zmiana wszystkich wartości odżywczych
   - Dodawanie 'części' produktu
   - Dodawanie własnych produktów do bazy danych
   - button 'removeAllEaten' w FragmentEaten
