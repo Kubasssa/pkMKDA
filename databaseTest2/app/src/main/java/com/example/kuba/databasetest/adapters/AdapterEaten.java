@@ -37,6 +37,7 @@ public class AdapterEaten extends RecyclerView.Adapter<AdapterEaten.ViewHolder>
         ImageView mDeleteProduct;
         //RelativeLayout mParentLayout;
         CardView mParentLayout;
+        TextView mProductPortion;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener)
         {
@@ -44,6 +45,7 @@ public class AdapterEaten extends RecyclerView.Adapter<AdapterEaten.ViewHolder>
             mProductName = itemView.findViewById(R.id.eaten_product_name);
             mDeleteProduct = itemView.findViewById(R.id.delete_eaten_product);
             mParentLayout = itemView.findViewById(R.id.layout_item_eaten);
+            mProductPortion = itemView.findViewById(R.id.eaten_portion);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -96,6 +98,8 @@ public class AdapterEaten extends RecyclerView.Adapter<AdapterEaten.ViewHolder>
         Item currentItem = mItemList.get(position);
 
         holder.mProductName.setText(currentItem.getText1());
+        holder.mProductPortion.setText(currentItem.getText2());
+
     }
 
     @Override

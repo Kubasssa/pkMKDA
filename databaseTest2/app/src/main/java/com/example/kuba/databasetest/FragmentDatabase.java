@@ -77,9 +77,9 @@ public class FragmentDatabase extends Fragment
             }
 
             @Override
-            public void onAddClick(int position)
+            public void onAddClick(int position, double multiplier)
             {
-                addToEaten(position);
+                addToEaten(position, multiplier);
                 Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vb.vibrate(10);
             }
@@ -135,9 +135,15 @@ public class FragmentDatabase extends Fragment
         fragmentDatabaseRecyclerView.setAdapter(fragmentDatabaseAdapter);
     }
 
-    public void addToEaten(int position)
+    public void addToEaten(int position, double multiplier)
     {
+
         Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
+        omnomnom.setText2(String.valueOf(((int)(100*multiplier)))+"g");
+        omnomnom.setCalories((int)(omnomnom.getCalories()*multiplier));
+        omnomnom.setCarbs(omnomnom.getCarbs()*multiplier);
+        omnomnom.setFat(omnomnom.getFat()*multiplier);
+        omnomnom.setProteins(omnomnom.getProteins()*multiplier);
 
         database.eatProduct(omnomnom);
         database.addAlreadyEatenCalories(omnomnom.getCalories());

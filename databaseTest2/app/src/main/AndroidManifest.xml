@@ -24,6 +24,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ActivityRegistration" />
         <activity android:name=".ActivityEditProfile" />
+        <activity android:name=".ActivityAddNewProduct" />
         <activity
             android:name=".oldclasses.zClassUnused00"
             android:label="@string/title_activity_add_food" />

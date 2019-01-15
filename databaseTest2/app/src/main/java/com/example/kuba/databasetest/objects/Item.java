@@ -69,6 +69,30 @@ public class Item implements Serializable
         return mProteins;
     }
 
+    public void setText1(String mText1) {
+        this.mText1 = mText1;
+    }
+
+    public void setText2(String mText2) {
+        this.mText2 = mText2;
+    }
+
+    public void setCalories(int mCalories) {
+        this.mCalories = mCalories;
+    }
+
+    public void setCarbs(double mCarbs) {
+        this.mCarbs = mCarbs;
+    }
+
+    public void setFat(double mFat) {
+        this.mFat = mFat;
+    }
+
+    public void setProteins(double mProteins) {
+        this.mProteins = mProteins;
+    }
+
 
 
 

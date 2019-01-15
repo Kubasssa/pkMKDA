@@ -35,7 +35,6 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
 
     DatabaseHelper helper;
 
-    //TODO: updating all nutritional values, not only calories
     //TODO: add feature: change selected instead of all (e.f. only weight, only height ect)
 
     @Override
@@ -156,7 +155,7 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
                             showToast("Edited successfully");
 
                     } else if (sex.equals("Male")) {
-                        kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) - (233.3 * diff);
+                        kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) + (233.3 * diff);
                         kcalInt = kcal.intValue();
                         showToast("The caloric demand is: " + kcalInt);
 

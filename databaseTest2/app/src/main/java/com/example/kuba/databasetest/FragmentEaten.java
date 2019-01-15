@@ -36,6 +36,8 @@ public class FragmentEaten extends Fragment
     private Button buttonRemoveAll;
     DatabaseHelper database;
 
+    //TODO: display portion in the eaten product
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -185,8 +187,6 @@ public class FragmentEaten extends Fragment
     }
 
     public void showEatenProductDetails(int position) {
-
-
 
         //TODO: make a class EatenProductBuilder later
         android.support.v7.app.AlertDialog.Builder eatenProductDetails = new android.support.v7.app.AlertDialog.Builder(getActivity());

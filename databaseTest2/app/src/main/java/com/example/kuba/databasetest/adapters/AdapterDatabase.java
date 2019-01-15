@@ -2,15 +2,19 @@ package com.example.kuba.databasetest.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.kuba.databasetest.FragmentDatabase;
+import com.example.kuba.databasetest.MainActivity;
 import com.example.kuba.databasetest.objects.Item;
 import com.example.kuba.databasetest.R;
 
@@ -25,7 +29,7 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
     public interface OnItemClickListener
     {
         void onItemClick(int position);
-        void onAddClick(int position);
+        void onAddClick(int position, double multiplier);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener)
@@ -37,8 +41,8 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
     {
         public TextView mTextView1;
         public TextView mTextView2;
-        //public ImageView mEatImage;
         public ImageView mEatButton;
+        public EditText mMultiplier;
 
         public ViewHolder(@NonNull View itemView, final OnItemClickListener listener)
         {
@@ -46,6 +50,7 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
         mTextView1 = itemView.findViewById(R.id.layout_item_database_text_top_id);
         mTextView2 = itemView.findViewById(R.id.layout_item_database_text_bottom_id);
         mEatButton = itemView.findViewById(R.id.layout_item_database_button);
+        mMultiplier = itemView.findViewById(R.id.layout_item_database_multiplier);
 
         /** on Clicks**/
         itemView.setOnClickListener(new View.OnClickListener()
@@ -73,9 +78,18 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
                 if(listener != null)
                 {
                     int position = getAdapterPosition();
+                    double multiplier;
                     if(position != RecyclerView.NO_POSITION)
                     {
-                        listener.onAddClick(position);
+                        if(TextUtils.isEmpty(mMultiplier.getText().toString()) ||
+                                mMultiplier.getText().toString().equals("0"))
+                        {
+                            System.out.println("ERROR! Field cannot be empty or equal 0!!!");
+                            //TODO: Make tost
+                        }else {
+                            multiplier = Double.parseDouble((mMultiplier.getText().toString()));
+                            listener.onAddClick(position, multiplier);
+                        }
                     }
                 }
             }});

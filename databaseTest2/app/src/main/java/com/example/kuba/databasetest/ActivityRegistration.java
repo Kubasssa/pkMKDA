@@ -25,7 +25,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
     int kcalInt;
     String sex,login,password,temp;
     TextView diffInput;
-    Double diffInputValue = 0.0;
+    Double diffInputValue;
     boolean ifUserExist;
 
     EditText ageInput, weightInput, heightInput,nameInput, passwordInput;
@@ -53,6 +53,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
         spinner2.setAdapter(adapter2);
         spinner2.setOnItemSelectedListener(this);
 
+
         ageInput = (EditText) findViewById(R.id.ageInput);
 
         weightInput = (EditText) findViewById(R.id.editProfile_edittext_weight_input);
@@ -66,6 +67,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
 
 
         //init value of diffInput
+        diffInputValue = 0.0;
         diffInput.setText(String.format("%.1f",diffInputValue));
 
         //- button
@@ -138,7 +140,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
                         kcalInt = kcal.intValue();
                         showToast("The caloric demand is: " + kcalInt);
 
-                        helper.addTotalCaloriesToEat(kcalInt);
+                        helper.setUserNutritionGoal(kcalInt);
                         boolean isInserted = helper.insertUserData(login, password, sex);
 
                         if (isInserted == true) {
@@ -150,11 +152,11 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
                             //  Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
                         }
                     } else if (sex.equals("Male")) {
-                        kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) - (233.3 * diff);
+                        kcal = (((66 + (13.7 * weight) + (5 * height) - (6.76 * age))) * activity) + (233.3 * diff);
                         kcalInt = kcal.intValue();
                         showToast("The caloric demand is:  " + kcalInt);
 
-                        helper.addTotalCaloriesToEat(kcalInt);
+                        helper.setUserNutritionGoal(kcalInt);
                         boolean isInserted = helper.insertUserData(login, password, sex);
 
                         if (isInserted == true) {
