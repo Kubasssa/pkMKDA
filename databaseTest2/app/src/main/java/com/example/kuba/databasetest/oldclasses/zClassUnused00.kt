@@ -1,12 +1,15 @@
-package com.example.kuba.databasetest
+package com.example.kuba.databasetest.oldclasses
 
+/***** old 'addFood.kt' class *****/
 import android.os.Bundle
 import android.app.Activity
 import android.support.v7.app.AlertDialog
 import android.view.View
 import android.widget.Button
+import com.example.kuba.databasetest.objects.DatabaseHelper
+import com.example.kuba.databasetest.R
 
-class addFood : Activity() {
+class zClassUnused00 : Activity() {
 
     lateinit var AddButton: Button
     lateinit var myDb: DatabaseHelper
@@ -15,7 +18,7 @@ class addFood : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_food)
 
-        AddButton=findViewById(R.id.addButton)
+        AddButton=findViewById(R.id.button_add)
 
         myDb = DatabaseHelper(this)
 

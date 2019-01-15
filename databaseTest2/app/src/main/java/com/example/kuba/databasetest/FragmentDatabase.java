@@ -1,6 +1,7 @@
 package com.example.kuba.databasetest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -15,16 +16,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.Toast;
 
-import java.sql.SQLOutput;
+import com.example.kuba.databasetest.adapters.AdapterDatabase;
+import com.example.kuba.databasetest.objects.DatabaseHelper;
+import com.example.kuba.databasetest.objects.Item;
+import com.example.kuba.databasetest.objects.ItemDetails;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static com.example.kuba.databasetest.R.menu.layout_search_menu;
 
@@ -35,20 +39,32 @@ public class FragmentDatabase extends Fragment
     private RecyclerView fragmentDatabaseRecyclerView;
     private AdapterDatabase fragmentDatabaseAdapter;
     private RecyclerView.LayoutManager fragmentDatabaseLayoutManager;
+    Button mAddNewProduct;
     DatabaseHelper database;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.layout_database, container, false);
+        final View view = inflater.inflate(R.layout.layout_frag_database, container, false); //changed view to final
         database = new DatabaseHelper(getContext()); //view.getContext
 
         /**** inits ****/
         setHasOptionsMenu(true);
+        initButtons(view);
         createItemList();
         buildRecyclerView(view);
 
         /**** onClicks ****/
+        mAddNewProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(10);
+                Intent intent = new Intent(view.getContext(), ActivityAddNewProduct.class);
+                startActivity(intent);
+            }
+        });
         fragmentDatabaseAdapter.setOnItemClickListener(new AdapterDatabase.OnItemClickListener()
         {
             @Override
@@ -71,6 +87,11 @@ public class FragmentDatabase extends Fragment
         });
 
         return view;
+    }
+
+    public void initButtons(View view)
+    {
+        mAddNewProduct = view.findViewById(R.id.FragDatabase_button_add_new_product);
     }
 
     public void createItemList ()

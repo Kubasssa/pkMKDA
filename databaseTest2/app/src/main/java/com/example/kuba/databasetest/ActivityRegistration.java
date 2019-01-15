@@ -13,7 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RegistFinal extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import com.example.kuba.databasetest.objects.DatabaseHelper;
+
+public class ActivityRegistration extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     Float age;
@@ -39,7 +41,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
         helper = new DatabaseHelper(getApplicationContext());
 
-        final Spinner spinner = findViewById(R.id.spinner1);
+        final Spinner spinner = findViewById(R.id.editProfile_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.aktywność, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -53,12 +55,12 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
         ageInput = (EditText) findViewById(R.id.ageInput);
 
-        weightInput = (EditText) findViewById(R.id.weightInput);
-        heightInput = (EditText) findViewById(R.id.heightInput);
-        addButton = (Button) findViewById(R.id.add);
-        button = (Button) findViewById(R.id.button);
-        button2 = (Button) findViewById(R.id.button2);
-        diffInput = (TextView) findViewById(R.id.diffInput);
+        weightInput = (EditText) findViewById(R.id.editProfile_edittext_weight_input);
+        heightInput = (EditText) findViewById(R.id.editProfile_edittext_height_input);
+        addButton = (Button) findViewById(R.id.editProfile_button_add);
+        button = (Button) findViewById(R.id.editProfile_button_decrease);
+        button2 = (Button) findViewById(R.id.editProfile_button_increase);
+        diffInput = (TextView) findViewById(R.id.editProfile_textview_monthly_change);
         nameInput = (EditText) findViewById(R.id.nameInput);
         passwordInput = (EditText) findViewById(R.id.surnameInput);
 
@@ -101,7 +103,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
                 password = passwordInput.getText().toString().trim();
                 diff=diffInputValue;
 
-                Cursor allData = helper.getAllData();
+                Cursor allData = helper.getAllUsersData();
 
                 while (allData.moveToNext()){
                     System.out.println(allData.getString(1));
@@ -141,7 +143,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
                         if (isInserted == true) {
                             helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
                             startActivity(intent);
                         } else {
                             showToast("jeblo cos ");
@@ -157,7 +159,7 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
                         if (isInserted == true) {
                             helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
                             startActivity(intent);
                         } else {
                             showToast("jeblo cos ");
@@ -180,6 +182,6 @@ public class RegistFinal extends AppCompatActivity implements AdapterView.OnItem
 
     }
     private void showToast(String text){
-        Toast.makeText(RegistFinal.this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(ActivityRegistration.this,text,Toast.LENGTH_SHORT).show();
     }
 }

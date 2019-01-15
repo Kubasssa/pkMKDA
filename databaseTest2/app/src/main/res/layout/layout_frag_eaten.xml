@@ -18,23 +18,22 @@
         android:layout_marginBottom="10dp" />
 
     <Button
-        android:id="@+id/removeAllButton"
+        android:id="@+id/button_remove_all"
         android:layout_width="193dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/fe_button"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="54dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="-2dp"
-        android:layout_toEndOf="@+id/addButton"
+        android:layout_toEndOf="@+id/button_add"
         android:background="@drawable/remove_button"
         android:text="Remove All"
         android:textColor="@android:color/white" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/button_add"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

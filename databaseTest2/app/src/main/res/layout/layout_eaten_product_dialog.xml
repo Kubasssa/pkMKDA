@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:layout_marginLeft="80dp"
+    android:layout_marginRight="80dp"
+    android:layout_marginTop="60dp">
+
+    <TextView
+        android:id="@+id/eatenProductDialog_title"
+        android:text="PRODUCT NAME"
+        android:textColor="#6600ff"
+        android:textSize="18dp"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
+
+    <TextView
+        android:id="@+id/eatenProductDialog_flavour_calories"
+        android:text="Calories: "
+        android:textColor="#330080"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_title"/>
+
+    <TextView
+        android:id="@+id/eatenProductDialog_calories"
+        android:text="0 kcal"
+        android:textColor="@android:color/black"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_title"
+        android:layout_alignStart="@+id/eatenProductDialog_title"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="0dp"
+        />
+
+    <TextView
+        android:id="@+id/eatenProductDialog_flavour_carbs"
+        android:text="Carbs: "
+        android:textColor="#330080"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_flavour_calories"/>
+
+    <TextView
+        android:id="@+id/eatenProductDialog_carbs"
+        android:text="0 g"
+        android:textColor="@android:color/black"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_calories"
+        android:layout_alignStart="@+id/eatenProductDialog_title"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="1dp"
+        />
+
+    <TextView
+        android:id="@+id/eatenProductDialog_flavour_fat"
+        android:text="Fat: "
+        android:textColor="#330080"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_flavour_carbs"/>
+
+    <TextView
+        android:id="@+id/eatenProductDialog_fat"
+        android:text="0 g"
+
+        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_carbs"
+        android:layout_alignStart="@+id/eatenProductDialog_title"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="-1dp"
+        />
+
+    <TextView
+        android:id="@+id/eatenProductDialog_flavour_proteins"
+        android:text="Proteins: "
+        android:textColor="#330080"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_flavour_fat"/>
+
+    <TextView
+        android:id="@+id/eatenProductDialog_proteins"
+        android:text="0 g"
+        android:textColor="@android:color/black"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eatenProductDialog_fat"
+        android:layout_alignStart="@+id/eatenProductDialog_title"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="-2dp"
+         />
+
+
+</RelativeLayout>

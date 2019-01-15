@@ -5,7 +5,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1fA47f"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/FragDatabase_button_add_new_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/back_button"
+        android:text="    Add new product    "
+        android:textColor="@android:color/white"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fd_recycler_view"
@@ -13,6 +25,7 @@
         android:layout_height="match_parent"
         android:padding="8dp"
         android:background="#1DA475"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        android:layout_marginTop="55dp"/>
 
 </RelativeLayout>

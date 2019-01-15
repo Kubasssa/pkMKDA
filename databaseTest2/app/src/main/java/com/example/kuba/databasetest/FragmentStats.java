@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.kuba.databasetest.objects.DatabaseHelper;
+
 import java.math.BigDecimal;
 
 public class FragmentStats extends Fragment
@@ -58,7 +60,7 @@ public class FragmentStats extends Fragment
             {
                 Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vb.vibrate(10);
-                Intent intent = new Intent(view.getContext(), EditProfile.class);
+                Intent intent = new Intent(view.getContext(), ActivityEditProfile.class);
                 startActivity(intent);
             }
         });

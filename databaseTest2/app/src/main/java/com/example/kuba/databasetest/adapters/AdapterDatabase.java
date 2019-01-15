@@ -1,15 +1,18 @@
-package com.example.kuba.databasetest;
+package com.example.kuba.databasetest.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.kuba.databasetest.objects.Item;
+import com.example.kuba.databasetest.R;
 
 import java.util.ArrayList;
 
@@ -23,7 +26,6 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
     {
         void onItemClick(int position);
         void onAddClick(int position);
-        //void onDeleteClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener)
@@ -45,6 +47,7 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
         mTextView2 = itemView.findViewById(R.id.layout_item_database_text_bottom_id);
         mEatButton = itemView.findViewById(R.id.layout_item_database_button);
 
+        /** on Clicks**/
         itemView.setOnClickListener(new View.OnClickListener()
         {
             @Override

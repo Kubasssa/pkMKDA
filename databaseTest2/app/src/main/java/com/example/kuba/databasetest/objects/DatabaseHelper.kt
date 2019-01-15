@@ -1,4 +1,4 @@
-package com.example.kuba.databasetest
+package com.example.kuba.databasetest.objects
 
 import android.content.ContentValues
 import android.content.Context
@@ -28,7 +28,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         /** 'EatenProducts' table**/
         const val EATEN_TAB = "EatenProducts"
 
-        /** 'Profile settings (sex, height, weight)' table**/
+        /** 'Profile settings (sex, height, weight) table**/
         const val PROFILE_TAB = "ProfileSettings"
         const val COL_7 = "sex"
         const val COL_8 = "height"
@@ -41,8 +41,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     }
 
-    override fun onCreate(db: SQLiteDatabase?)
-    {
+    override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL("CREATE TABLE IF NOT EXISTS $TABLE_NAME(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT , " +
                 "login TEXT, " +
@@ -102,6 +101,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "proteinsAlreadyEaten) " +
                 "VALUES (1, 2150, 358.4, 47.8, 161.3, 0, 0.0, 0.0, 0.0)")
 
+        //TODO: IMPLEMENT \/
         /** Carbs       =50%;   1g = 3kcal
          *  Fat         =20%;   1g = 9kcal
          *  Proteins    =30%;   1g = 4kcal **/
@@ -115,6 +115,55 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
 
+    private fun populateDatabase(db: SQLiteDatabase?) {
+        //val db = this.writableDatabase
+        println("CALLED populateDatabase() METHOD") //for debugging
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Grapes','100g', 41.0 ,0.2 , 11.8, 0.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White Bread','100g', 238.0 ,50.0 , 1.2, 6.15)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Spaghetti','300g', 450.0 ,54.0 , 5.11, 7.12)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Pork','200g', 271.0 ,0.0 , 17.04, 27.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Orange','50g', 47.0 ,12.0 , 0.1, 0.9)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Sunflower Seeds','25g', 141.0 ,5.0 , 12.5, 6.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lamb','100g', 294.0 ,0.0 , 21.0, 25.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('BigMac','200g', 514.0 ,40.4 , 30.2, 24.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Potatoes','100g', 76.0 ,17.0 , 0.1, 2.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Broccoli','100g', 33.0 ,7.0 , 0.4, 2.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Fries','100g', 311.0 , 41.0 , 15.5, 3.4)")
+        //TODO repair Madzia's database items
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Apple','100g', 52.0 ,13.81 , 0.17, 0.88)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Beef','100g', 228.0 ,0.0 , 17.07, 17.37)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Avocado','100g', 160.0 ,8.53 , 14.66, 2)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Cucumber','100g', 12.0 ,2.16 , 0.16, 0.59)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lettuce','50g', 8.0 ,8.7 , 0.05, 1.01)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Dark chocolate','50g', 300.0 ,22.6 , 21.34, 3.49)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Milk chocolate','50g', 267.0 ,29.4 , 14.86, 3.83)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White chocolate','50g', 268.0 ,29.9 , 16.2, 2.68)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Strawberry','32g', 8.0 ,6.07 , 0.67, 4.0)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Almond','25g', 145 ,5.39 ,12.48 ,5.28 )")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Kaki','100g', 70.0 , 18.59 , 0.19, 0.58)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Artichoke','100g', 47.0 , 10.51 , 0.15, 3.27)")
+//        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Buckwheat groats','100g', 346.0, 74.95 , 2.71, 11.73)")
+    }
+
+    //TODO add fun addNewProduct(item: Item)
+    fun addNewProduct(item: Item)
+    {
+        val db = this.writableDatabase
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('"+item.text1+"','"+item.text2+"','"+item.calories+"','"+item.carbs+"','"+item.fat+"','"+item.proteins+"')")
+    }
+
+    private fun getLastEatenProductId(): Int {
+        val db = this.readableDatabase
+        /**** get top foodId****/
+        val check = db.rawQuery("SELECT MAX(foodId) FROM $EATEN_TAB", null)
+        var e = ArrayList<Int>()
+        while(check.moveToNext()) {e.add(check.getInt(0))}
+        if (e.get(0) == 0 || e.get(0) == null)
+            return 0
+        else
+            return e.get(0)
+    }
+
     fun insertUserData(login: String, password: String, sex: String): Boolean? {
         val db = this.writableDatabase
         val cv = ContentValues()
@@ -125,23 +174,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return !res.equals(-1)
     }
 
-    fun getAllData(): Cursor {
+    fun getAllUsersData(): Cursor {
 
         val db = this.writableDatabase
         return db.rawQuery("SELECT * FROM $TABLE_NAME", null)
 
-    }
-
-    /*** prints foodId and foodName from food_eaten table - used in debugging***/
-    fun showShitInDatabase() {
-        val db = this.readableDatabase
-        var e = ArrayList<String>()
-        val d = db.rawQuery("SELECT * FROM $EATEN_TAB", null)
-        while(d.moveToNext()) {
-            e.add(d.getString(0))
-            e.add(d.getString(1))
-        }
-        println(e)
     }
 
     fun getAllFoodData(): Cursor {
@@ -156,11 +193,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return db!!.rawQuery("SELECT foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins FROM $EATEN_TAB", null)
     }
 
-    fun deleteData(id: Int) {
+    fun removeProductFromEaten(id: Int) {
         val db = this.writableDatabase
 
         /**** get top foodId****/
-        val topIndex = getTopId()
+        val topIndex = getLastEatenProductId()
         println("Top foodId index: "+topIndex)
 
         /**** delete item ****/
@@ -169,41 +206,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         /**** updating primary key in database ****/
         for(i in (id+1)..topIndex) { db.execSQL("UPDATE $EATEN_TAB SET foodId = '" + (i - 1) + "' WHERE foodId = '" + i + "' ") }
-
-    }
-
-    fun populateDatabase(db: SQLiteDatabase?) {
-        //val db = this.writableDatabase
-        println("CALLED populateDatabase() METHOD") //for debugging
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Grapes','100g', 41.0 ,0.2 , 11.8, 0.8)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White Bread','100g', 238.0 ,50.0 , 1.2, 6.15)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Spaghetti','300g', 450.0 ,54.0 , 5.11, 7.12)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Pork','200g', 271.0 ,0.0 , 17.04, 27.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Orange','50g', 47.0 ,12.0 , 0.1, 0.9)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Sunflower Seeds','25g', 141.0 ,5.0 , 12.5, 6.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lamb','100g', 294.0 ,0.0 , 21.0, 25.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('BigMac','200g', 514.0 ,40.4 , 30.2, 24.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Potatoes','100g', 76.0 ,17.0 , 0.1, 2.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Broccoli','100g', 33.0 ,7.0 , 0.4, 2.8)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Fries','100g', 311.0 , 41.0 , 15.5, 3.4)")
     }
 
     fun eatProduct(item: Item) {
         val db = this.writableDatabase
-        val index = getTopId()
+        val index = getLastEatenProductId()
         db.execSQL("INSERT INTO $EATEN_TAB (foodId, foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('"+(index+1)+"','"+item.text1+"','"+item.text2+"','"+item.calories+"','"+item.carbs+"','"+item.fat+"','"+item.proteins+"')")
-    }
-
-    fun getTopId(): Int {
-        val db = this.readableDatabase
-        /**** get top foodId****/
-        val check = db.rawQuery("SELECT MAX(foodId) FROM $EATEN_TAB", null)
-        var e = ArrayList<Int>()
-        while(check.moveToNext()) {e.add(check.getInt(0))}
-        if (e.get(0) == 0 || e.get(0) == null)
-            return 0
-        else
-            return e.get(0)
     }
 
     fun insertProfileSettings(sex: String, height: Int, age: Int): Boolean? {
@@ -373,6 +381,18 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         var currentValue = getAlreadyEatenProteins() + cal
         db.execSQL("UPDATE $CALORIES_TAB SET proteinsAlreadyEaten = '" + currentValue + "' WHERE caloriesId = 1")
     }
+
+    /*** prints foodId and foodName from food_eaten table - used in debugging***/
+    fun showShitInDatabase() {
+        val db = this.readableDatabase
+        var e = ArrayList<String>()
+        val d = db.rawQuery("SELECT * FROM $EATEN_TAB", null)
+        while(d.moveToNext()) {
+            e.add(d.getString(0))
+            e.add(d.getString(1))
+        }
+        println(e)
+    }
 }
 
 
@@ -404,7 +424,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 //    return true
 //}
 //
-//fun deleteData(id: String) {
+//fun removeProductFromEaten(id: String) {
 //    val db = this.writableDatabase
 //    db.delete(TABLE_NAME, "ID=?", arrayOf(id))
 //    db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + TABLE_NAME + "'");

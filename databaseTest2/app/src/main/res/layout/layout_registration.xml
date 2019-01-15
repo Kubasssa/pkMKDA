@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistFinal">
+    tools:context=".ActivityRegistration">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="340dp"
@@ -84,7 +84,7 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/editProfile_textview_flavour_text1"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj obecną wagę(kg):"
@@ -93,7 +93,7 @@
 
 
             <EditText
-                android:id="@+id/weightInput"
+                android:id="@+id/editProfile_edittext_weight_input"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
@@ -104,7 +104,7 @@
                 tools:layout_editor_absoluteY="75dp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/editProfile_textview_flavour_text2"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="Podaj wzrost(cm):"
@@ -112,7 +112,7 @@
                 android:visibility="invisible"/>
 
             <EditText
-                android:id="@+id/heightInput"
+                android:id="@+id/editProfile_edittext_height_input"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:ems="10"
@@ -142,7 +142,7 @@
                 android:hint="Age"/>
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/editProfile_textview_flavour_text3"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="5dp"
@@ -150,7 +150,7 @@
                 android:textSize="13sp" />
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/editProfile_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginBottom="3dp"
@@ -162,7 +162,7 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/editProfile_textview_flavour_text4"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:layout_marginLeft="5dp"
@@ -174,7 +174,7 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/editProfile_button_decrease"
                     android:layout_width="60dp"
                     android:layout_height="44dp"
                     android:layout_marginLeft="50dp"
@@ -185,7 +185,7 @@
                     tools:layout_editor_absoluteY="454dp" />
 
                 <TextView
-                    android:id="@+id/diffInput"
+                    android:id="@+id/editProfile_textview_monthly_change"
                     android:layout_width="50dp"
                     android:layout_height="44dp"
                     android:text="0"
@@ -195,7 +195,7 @@
                     tools:layout_editor_absoluteY="456dp" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/editProfile_button_increase"
                     android:layout_width="60dp"
                     android:layout_height="44dp"
                     android:layout_marginRight="50dp"
@@ -208,7 +208,7 @@
             </TableRow>
 
             <Button
-                android:id="@+id/add"
+                android:id="@+id/editProfile_button_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

@@ -12,20 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".ActivityLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainMenu" />
-        <activity android:name=".RegView" />
+        <activity android:name=".oldclasses.zClassUnused01" />
+        <activity android:name=".oldclasses.zClassUnused02" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegistFinal" />
-        <activity android:name=".EditProfile" />
+        <activity android:name=".ActivityRegistration" />
+        <activity android:name=".ActivityEditProfile" />
         <activity
-            android:name=".addFood"
+            android:name=".oldclasses.zClassUnused00"
             android:label="@string/title_activity_add_food" />
     </application>
 

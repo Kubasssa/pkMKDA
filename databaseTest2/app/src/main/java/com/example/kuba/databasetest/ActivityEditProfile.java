@@ -1,7 +1,6 @@
 package com.example.kuba.databasetest;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -16,7 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import com.example.kuba.databasetest.objects.DatabaseHelper;
+
+public class ActivityEditProfile extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     Float age;
@@ -34,6 +35,8 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
 
     DatabaseHelper helper;
 
+    //TODO: updating all nutritional values, not only calories
+    //TODO: add feature: change selected instead of all (e.f. only weight, only height ect)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +45,19 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
 
         helper = new DatabaseHelper(getApplicationContext());
 
-        final Spinner spinner = findViewById(R.id.spinner1);
+        final Spinner spinner = findViewById(R.id.editProfile_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.aktywność, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
-        weightInput = (EditText) findViewById(R.id.weightInput);
-        heightInput = (EditText) findViewById(R.id.heightInput);
-        addButton = (Button) findViewById(R.id.add);
-        button = (Button) findViewById(R.id.button);
-        button2 = (Button) findViewById(R.id.button2);
-        diffInput = (TextView) findViewById(R.id.diffInput);
-        BackButton = (Button) findViewById(R.id.backButton);
+        weightInput = (EditText) findViewById(R.id.editProfile_edittext_weight_input);
+        heightInput = (EditText) findViewById(R.id.editProfile_edittext_height_input);
+        addButton = (Button) findViewById(R.id.editProfile_button_add);
+        button = (Button) findViewById(R.id.editProfile_button_decrease);
+        button2 = (Button) findViewById(R.id.editProfile_button_increase);
+        diffInput = (TextView) findViewById(R.id.editProfile_textview_monthly_change);
+        BackButton = (Button) findViewById(R.id.editProfile_button_back);
 
         //init value of diffInput
         diffInput.setText(String.format("%.1f",diffInputValue));
@@ -178,7 +181,7 @@ public class EditProfile extends AppCompatActivity implements AdapterView.OnItem
 
     }
     private void showToast(String text){
-        Toast.makeText(EditProfile.this,text,Toast.LENGTH_SHORT).show();
+        Toast.makeText(ActivityEditProfile.this,text,Toast.LENGTH_SHORT).show();
     }
 }
 

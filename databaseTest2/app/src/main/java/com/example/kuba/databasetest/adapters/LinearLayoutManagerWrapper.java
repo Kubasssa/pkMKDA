@@ -1,4 +1,4 @@
-package com.example.kuba.databasetest;
+package com.example.kuba.databasetest.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;

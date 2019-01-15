@@ -1,4 +1,4 @@
-package com.example.kuba.databasetest;
+package com.example.kuba.databasetest.objects;
 
 import java.io.Serializable;
 

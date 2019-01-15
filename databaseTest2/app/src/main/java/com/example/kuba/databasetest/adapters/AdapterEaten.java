@@ -1,4 +1,4 @@
-package com.example.kuba.databasetest;
+package com.example.kuba.databasetest.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -6,10 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.kuba.databasetest.objects.Item;
+import com.example.kuba.databasetest.R;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class AdapterEaten extends RecyclerView.Adapter<AdapterEaten.ViewHolder>
 
     public interface OnItemClickListener
     {
+        void onItemClick(int position);
         void onDeleteClick(int position);
     }
 
@@ -42,6 +44,22 @@ public class AdapterEaten extends RecyclerView.Adapter<AdapterEaten.ViewHolder>
             mProductName = itemView.findViewById(R.id.eaten_product_name);
             mDeleteProduct = itemView.findViewById(R.id.delete_eaten_product);
             mParentLayout = itemView.findViewById(R.id.layout_item_eaten);
+
+            itemView.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if(listener != null)
+                    {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) //position must be valid
+                        {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
             mDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override

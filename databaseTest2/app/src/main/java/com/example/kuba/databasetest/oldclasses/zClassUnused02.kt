@@ -1,5 +1,6 @@
-package com.example.kuba.databasetest
+package com.example.kuba.databasetest.oldclasses
 
+/***** old 'zClassUnused02nused02.kt' class *****/
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +10,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.kuba.databasetest.ActivityLogin
+import com.example.kuba.databasetest.objects.DatabaseHelper
+import com.example.kuba.databasetest.R
 
 
-
-class RegView : AppCompatActivity() {
+class zClassUnused02 : AppCompatActivity() {
 
     lateinit var Regist: Button
     lateinit var ViewAllButton: Button
@@ -38,7 +41,7 @@ class RegView : AppCompatActivity() {
 
 
         AddData()
-      //  deleteData()
+      //  removeProductFromEaten()
         viewAllData()
     }
 
@@ -69,7 +72,7 @@ class RegView : AppCompatActivity() {
 
             if(isInserted==true){
                 Toast.makeText(applicationContext,"Data Inserted",Toast.LENGTH_SHORT).show()
-                val Intent = Intent(this,LoginActivity::class.java)
+                val Intent = Intent(this, ActivityLogin::class.java)
                 startActivity(Intent);
             }else{
                 Toast.makeText(applicationContext,"Data Could not be insereted",Toast.LENGTH_SHORT).show()
@@ -82,7 +85,7 @@ class RegView : AppCompatActivity() {
     fun viewAllData(){
 
         ViewAllButton.setOnClickListener(View.OnClickListener{
-            val res = myDb.getAllData()
+            val res = myDb.getAllUsersData()
 
             if(res.getCount()==0){
 
@@ -102,12 +105,22 @@ class RegView : AppCompatActivity() {
         })
     }
 
-//    fun deleteData() {
+    private fun showMessage(title: String, message: String?) {
+
+        val builder = AlertDialog.Builder(this)
+        builder.create()
+        builder.setCancelable(true)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.show()
+    }
+
+//    fun removeProductFromEaten() {
 //        DeleteButton.setOnClickListener (View.OnClickListener{
-//            val res = myDb.getAllData()
+//            val res = myDb.getAllUsersData()
 //            val id = res.getCount().toString().trim()
 //
-//            myDb.deleteData(id)
+//            myDb.removeProductFromEaten(id)
 //
 //            if (res.getCount()> 0 ) {
 //                Toast.makeText(applicationContext, "Data deleted ", Toast.LENGTH_SHORT).show()
@@ -158,13 +171,5 @@ class RegView : AppCompatActivity() {
 //
 //    }
 
-    private fun showMessage(title: String, message: String?) {
 
-        val builder = AlertDialog.Builder(this)
-        builder.create()
-        builder.setCancelable(true)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.show()
-    }
 }

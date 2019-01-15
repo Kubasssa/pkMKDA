@@ -11,10 +11,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import com.example.kuba.databasetest.objects.DatabaseHelper
 
 
-
-class LoginActivity : AppCompatActivity() {
+class ActivityLogin : AppCompatActivity() {
 
     lateinit var RegistLink: TextView
     lateinit var LoginButton: Button
@@ -40,10 +40,10 @@ class LoginActivity : AppCompatActivity() {
         viewAllData()
     }
 
-    fun goRegist(){
+    private fun goRegist(){
         RegistLink.setOnClickListener(View.OnClickListener{
 
-            val Intent = Intent(this,RegistFinal::class.java)
+            val Intent = Intent(this, ActivityRegistration::class.java)
             startActivity(Intent);
             val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             vb.vibrate(20)
@@ -52,13 +52,13 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    fun logIn (){
+    private fun logIn (){
         LoginButton.setOnClickListener(View.OnClickListener {
             val vb = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             vb.vibrate(20)
 
             var userExist: Boolean =false
-            val res = myDb.getAllData()
+            val res = myDb.getAllUsersData()
 
             if(res.getCount()==0){
 
@@ -82,10 +82,10 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    fun viewAllData(){
+    private fun viewAllData(){
 
         ViewAllUser.setOnClickListener(View.OnClickListener{
-            val res = myDb.getAllData()
+            val res = myDb.getAllUsersData()
 
             if(res.getCount()==0){
 
@@ -95,10 +95,9 @@ class LoginActivity : AppCompatActivity() {
                 while (res.moveToNext()){
                     buffer.append("id:"+res.getString(0)+"\n")
                     buffer.append("login:"+res.getString(1)+"\n")
-                    buffer.append("paasword:"+res.getString(2)+"\n")
+                    buffer.append("password:"+res.getString(2)+"\n")
                     buffer.append("sex:"+res.getString(3)+"\n\n")
                 }
-
                 showMessage("Data", buffer.toString())
                 res.close()
             }
