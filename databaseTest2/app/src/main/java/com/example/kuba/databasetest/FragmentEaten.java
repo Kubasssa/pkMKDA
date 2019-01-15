@@ -36,8 +36,6 @@ public class FragmentEaten extends Fragment
     private Button buttonRemoveAll;
     DatabaseHelper database;
 
-    //TODO: display portion in the eaten product
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)

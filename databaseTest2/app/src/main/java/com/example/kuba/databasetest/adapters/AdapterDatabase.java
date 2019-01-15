@@ -85,7 +85,7 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
                                 mMultiplier.getText().toString().equals("0"))
                         {
                             System.out.println("ERROR! Field cannot be empty or equal 0!!!");
-                            //TODO: Make tost
+                            //TODO: Make toast
                         }else {
                             multiplier = Double.parseDouble((mMultiplier.getText().toString()));
                             listener.onAddClick(position, multiplier);
