@@ -23,7 +23,7 @@ Projekt kompetencyjny.
   - ~~_Propozycja:_ Zmiana preferencji użytkownika przez użytkownika (waga, przyrost wagi itd)~~
   - _Propozycja:_ Notyfikacja przy przekroczeniu limitu amam
   - _Propozycja:_ Dodać zasady tworzenia konta (8 znaków, mail musi mieć @, brak polskich znaków itd)
-  - ~~_Propozycja(dużo roboty):_ Licznik zjedzonych produktów danego rodzaju
+  - ~~_Propozycja(dużo roboty):_ Licznik zjedzonych produktów danego rodzaju~~
     ~~>desc: Na ten moment do bazy danych dodawane są produkty jako pojedyńcze itemy. Lepiej by wyglądało, gdyby item był wyświetlany jako "produkt zjedzony X razy" niż wylistowanie go kilkakrotnie.~~
     
     
