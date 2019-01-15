@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.kuba.databasetest.FragmentDatabase;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class ItemDetails extends Fragment
 {
     private Item product;
-    private ImageButton buttonBackToDatabase;
+    private Button buttonBackToDatabase;
     PieChart pieChart;
 
 
@@ -56,7 +57,7 @@ public class ItemDetails extends Fragment
         setPieChart();
         addDataSet();
 
-        buttonBackToDatabase = (ImageButton) view.findViewById(R.id.btn_back_to_database);
+        buttonBackToDatabase = (Button) view.findViewById(R.id.btn_back_to_database);
         buttonBackToDatabase.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)

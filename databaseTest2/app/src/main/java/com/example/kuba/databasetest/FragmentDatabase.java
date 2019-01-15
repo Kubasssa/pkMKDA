@@ -60,7 +60,7 @@ public class FragmentDatabase extends Fragment
             public void onClick(View v)
             {
                 Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vb.vibrate(10);
+                vb.vibrate(8);
                 Intent intent = new Intent(view.getContext(), ActivityAddNewProduct.class);
                 startActivity(intent);
             }

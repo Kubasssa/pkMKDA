@@ -28,6 +28,9 @@
         <activity
             android:name=".oldclasses.zClassUnused00"
             android:label="@string/title_activity_add_food" />
+        <activity
+            android:name=".oldclasses.ActivitySetPreference"
+            android:label="@string/title_activity_set_preference"></activity>
     </application>
 
 </manifest>

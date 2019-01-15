@@ -144,7 +144,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
                         boolean isInserted = helper.insertUserData(login, password, sex);
 
                         if (isInserted == true) {
-                            helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
+                            helper.insertProfileSettings(sex,Math.round(height),Math.round(weight),Math.round(age));
                             Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
                             startActivity(intent);
                         } else {
@@ -160,7 +160,7 @@ public class ActivityRegistration extends AppCompatActivity implements AdapterVi
                         boolean isInserted = helper.insertUserData(login, password, sex);
 
                         if (isInserted == true) {
-                            helper.insertProfileSettings(sex,Math.round(height),Math.round(age));
+                            helper.insertProfileSettings(sex,Math.round(height),Math.round(weight),Math.round(age));
                             Intent intent = new Intent(getApplicationContext(), ActivityLogin.class);
                             startActivity(intent);
                         } else {

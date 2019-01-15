@@ -8,6 +8,7 @@ import android.os.Vibrator;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class FragmentStats extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         final View view = inflater.inflate(R.layout.layout_frag_stats, container, false);
+
 
         /** init database and layout items**/
         initDatabse(view);
@@ -157,7 +159,7 @@ public class FragmentStats extends Fragment
     double roundDoubleUp(double value)
     {
         BigDecimal i = new BigDecimal(value);
-        i = i.setScale(2, BigDecimal.ROUND_HALF_UP);
+        i = i.setScale(1, BigDecimal.ROUND_HALF_UP);
         value = i.doubleValue();
         return value;
     }

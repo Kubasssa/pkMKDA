@@ -15,14 +15,17 @@
         android:layout_marginTop="70dp">
     </com.github.mikephil.charting.charts.PieChart>
 
-    <ImageButton
+    <Button
         android:id="@+id/btn_back_to_database"
         android:layout_width="700px"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="77dp"
-        android:background="#2B6658"
+        android:background="@drawable/back_button"
+        android:text="Back"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
         app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <!--ImageButton

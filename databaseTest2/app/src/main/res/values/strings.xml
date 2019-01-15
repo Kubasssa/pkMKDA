@@ -20,4 +20,5 @@
         <item>Female</item>
     </string-array>
     <string name="title_activity_edit_profile2">EditProfile2</string>
+    <string name="title_activity_set_preference">ActivitySetPreference</string>
 </resources>

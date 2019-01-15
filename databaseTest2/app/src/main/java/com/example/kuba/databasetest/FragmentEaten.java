@@ -55,6 +55,8 @@ public class FragmentEaten extends Fragment
             {
                 removeAllItems();
                 Toast.makeText(getActivity(),"Items removed",Toast.LENGTH_SHORT).show();
+                Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(5);
                 //TODO: use something similar to code below instead ? ? ? ? ?
 //                for(int i = (fragmentEatenItemList.size()-1); i>=0;i--)
 //                {
@@ -71,7 +73,7 @@ public class FragmentEaten extends Fragment
                 ft.replace(R.id.ma_fragment_container, new FragmentDatabase());
                 ft.commit();
                 Vibrator vb = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vb.vibrate(10);
+                vb.vibrate(5);
 
             }
         });

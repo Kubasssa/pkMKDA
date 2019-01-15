@@ -32,7 +32,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val PROFILE_TAB = "ProfileSettings"
         const val COL_7 = "sex"
         const val COL_8 = "height"
-        const val COL_9 = "age"
+        const val COL_9 = "weight"
+        const val COL_10 = "age"
 
         /** 'Calories' table**/
         const val CALORIES_TAB = "Calories"
@@ -71,6 +72,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "profile INTEGER PRIMARY KEY, " +
                 "sex TEXT NOT NULL, " +
                 "height INTEGER NOT NULL, " +
+                "weight INTEGER NOT NULL, " +
                 "age INTEGER NOT NULL) " )
 
 
@@ -124,11 +126,11 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Grapes','100g', 41.0, 11.8, 0.2 , 0.8)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White Bread','100g', 238.0 ,50.0 , 1.2, 6.15)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Spaghetti','300g', 450.0 ,54.0 , 5.11, 7.12)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Pork','200g', 271.0 ,0.0 , 17.04, 27.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Orange','50g', 47.0 ,12.0 , 0.1, 0.9)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Sunflower Seeds','25g', 141.0 ,5.0 , 12.5, 6.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Pork','100g', 135.0 ,0.0 , 8.52, 13.5)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Orange','100g', 94.0 ,24.0 , 0.2, 1.8)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Sunflower Seeds','100g', 564.0 ,20.0 , 50.0, 24.0)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lamb','100g', 294.0 ,0.0 , 21.0, 25.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('BigMac','200g', 514.0 ,40.4 , 30.2, 24.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('BigMac','100g', 257.0 ,20.2 , 15.1, 12.0)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Potatoes','100g', 76.0 ,17.0 , 0.1, 2.0)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Broccoli','100g', 33.0 ,7.0 , 0.4, 2.8)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Fries','100g', 311.0 , 41.0 , 15.5, 3.4)")
@@ -136,15 +138,31 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Beef','100g', 228.0 ,0.0 , 17.07, 17.37)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Avocado','100g', 160.0 ,8.53 , 14.66, 2)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Cucumber','100g', 12.0 ,2.16 , 0.16, 0.59)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lettuce','50g', 8.0 ,8.7 , 0.05, 1.01)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Dark chocolate','50g', 300.0 ,22.6 , 21.34, 3.49)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Milk chocolate','50g', 267.0 ,29.4 , 14.86, 3.83)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White chocolate','50g', 268.0 ,29.9 , 16.2, 2.68)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Strawberry','32g', 8.0 ,6.07 , 0.67, 4.0)")
-        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Almond','25g', 145 ,5.39 ,12.48 ,5.28 )")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lettuce','100g', 16.0 ,17.4 , 0.1, 2.1)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Dark chocolate','100g', 600.0 ,45.2 , 42.68, 6.98)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Milk chocolate','100g', 534.0 ,58.8 , 29.72, 7.66)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('White chocolate','100g', 536.0 ,59.8 , 32.2, 5.36)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Strawberry','100g', 32.0 ,8.0 , 0.3, 0.7)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Almond','100g', 579.0 ,21.55 ,49.93 ,21.15 )")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Kaki','100g', 70.0 , 18.59 , 0.19, 0.58)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Artichoke','100g', 47.0 , 10.51 , 0.15, 3.27)")
         db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Buckwheat groats','100g', 346.0, 74.95 , 2.71, 11.73)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Beer','100g', 43.0 ,3.6 , 0.0, 0.5)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Wine','100g', 82.0 ,2.7 , 0.0, 0.1)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Whisky','100g', 250.0 ,0.1 , 0.0, 0.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Vodka','100g', 231.0 ,0.0 , 0.0, 0.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Coca-Cola','100g', 37.0 ,10.0 , 0.0, 0.1)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Juice','100g', 54.0 ,13.0 , 0.0, 0.2)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Water','100g', 0.0 ,0.0 , 0.0, 0.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Chocolate Bar','100g', 555.0 ,60.0 , 32.0, 6.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Lettuce','100g', 14.0 ,2.9 , 0.2, 1.4)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Donut','100g', 452.0 ,51.0 , 25.0, 4.9)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Cottage cheese','100g', 98.0 ,3.6 , 4.3, 11.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Cheese','100g', 402.0 ,1.3 , 33.0, 25.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Ham','100g', 145.0 ,1.5 , 6.0, 21.0)")
+        db!!.execSQL("INSERT INTO $FOOD_TAB (foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('Tomato','100g', 20.0 ,3.0 , 0.2, 1.0)")
+
+
     }
 
     //TODO add fun addNewProduct(item: Item)
@@ -216,12 +234,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.execSQL("INSERT INTO $EATEN_TAB (foodId, foodName, foodPortion, foodCalories, foodCrabs, foodFat, foodProteins) VALUES ('"+(index+1)+"','"+item.text1+"','"+item.text2+"','"+item.calories+"','"+item.carbs+"','"+item.fat+"','"+item.proteins+"')")
     }
 
-    fun insertProfileSettings(sex: String, height: Int, age: Int): Boolean? {
+    fun insertProfileSettings(sex: String, height: Int, weight: Int,age: Int): Boolean? {
         val db = this.writableDatabase
         val cv = ContentValues()
         cv.put(COL_7, sex)
         cv.put(COL_8, height)
-        cv.put(COL_9, age)
+        cv.put(COL_9, weight)
+        cv.put(COL_10, age)
         val res = db.insert(PROFILE_TAB, null, cv)
         return !res.equals(-1)
     }

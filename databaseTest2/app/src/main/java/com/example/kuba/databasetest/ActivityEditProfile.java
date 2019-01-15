@@ -103,18 +103,31 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Vibrator vb = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vb.vibrate(8);
                 temp = spinner.getSelectedItem().toString();
                 diff=diffInputValue;
 
+                Cursor allData = helper.getProfileSettings();
+
+                while (allData.moveToNext()) {
+                    System.out.println(allData.getString(1));
+
+                    sex = allData.getString(1);
+                    height = allData.getFloat(2);
+                    age = allData.getFloat(4);
+                    weight = allData.getFloat(3);
+                }
+
                 if(TextUtils.isEmpty(weightInput.getText().toString())){
-                    isInserted = false;
+                    isInserted = true;
                 }else {
                     weight = Float.valueOf(weightInput.getText().toString());
                     isInserted = true;
                 }
 
                 if(TextUtils.isEmpty(heightInput.getText().toString())){
-                    isInserted2 = false;
+                    isInserted2 = true;
 
                 }else {
                     height = Float.valueOf(heightInput.getText().toString());
@@ -123,15 +136,6 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
 
                 if(isInserted && isInserted2) {
 
-                    Cursor allData = helper.getProfileSettings();
-
-                    while (allData.moveToNext()) {
-                        System.out.println(allData.getString(1));
-
-                        sex = allData.getString(1);
-                        height = allData.getFloat(2);
-                        age = allData.getFloat(3);
-                    }
 
                     if (temp.equals("Very Low-sedentary lifestyle")) {
                         activity = 1.2;
@@ -152,6 +156,7 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
                         showToast("The caloric demand is: " + kcalInt);
 
                             helper.updateTotalCalories(kcalInt);
+                            helper.insertProfileSettings(sex,Math.round(height),Math.round(weight),Math.round(age));
                             showToast("Edited successfully");
 
                     } else if (sex.equals("Male")) {
@@ -160,6 +165,7 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
                         showToast("The caloric demand is: " + kcalInt);
 
                             helper.updateTotalCalories(kcalInt);
+                            helper.insertProfileSettings(sex,Math.round(height),Math.round(weight),Math.round(age));
                             showToast("Edited successfully");
                     }
                 }else{
