@@ -434,6 +434,15 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         println(e)
     }
+
+    fun resetAll(){
+        val db = this.writableDatabase
+        db.execSQL("DELETE FROM $TABLE_NAME")
+        db.execSQL("DELETE FROM $EATEN_TAB")
+        db.execSQL("DELETE FROM $CALORIES_TAB")
+        db.execSQL("DELETE FROM $PROFILE_TAB")
+        db.execSQL("VACUUM")
+    }
 }
 
 

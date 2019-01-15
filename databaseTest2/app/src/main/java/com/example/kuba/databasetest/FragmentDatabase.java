@@ -138,20 +138,20 @@ public class FragmentDatabase extends Fragment
     public void addToEaten(int position, double multiplier)
     {
 
-        Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
-        omnomnom.setText2(String.valueOf(((int)(100*multiplier)))+"g");
-        omnomnom.setCalories((int)(omnomnom.getCalories()*multiplier));
-        omnomnom.setCarbs(omnomnom.getCarbs()*multiplier);
-        omnomnom.setFat(omnomnom.getFat()*multiplier);
-        omnomnom.setProteins(omnomnom.getProteins()*multiplier);
+            Item omnomnom = new Item(fragmentDatabaseItemList.get(position));
+            omnomnom.setText2(String.valueOf(((int) (100 * multiplier))) + "g");
+            omnomnom.setCalories((int) (omnomnom.getCalories() * multiplier));
+            omnomnom.setCarbs(omnomnom.getCarbs() * multiplier);
+            omnomnom.setFat(omnomnom.getFat() * multiplier);
+            omnomnom.setProteins(omnomnom.getProteins() * multiplier);
 
-        database.eatProduct(omnomnom);
-        database.addAlreadyEatenCalories(omnomnom.getCalories());
-        database.addAlreadyEatenCarbs(omnomnom.getCarbs());
-        database.addAlreadyEatenFat(omnomnom.getFat());
-        database.addAlreadyEatenProteins(omnomnom.getProteins());
+            database.eatProduct(omnomnom);
+            database.addAlreadyEatenCalories(omnomnom.getCalories());
+            database.addAlreadyEatenCarbs(omnomnom.getCarbs());
+            database.addAlreadyEatenFat(omnomnom.getFat());
+            database.addAlreadyEatenProteins(omnomnom.getProteins());
 
-        Toast.makeText(getActivity(),"OMNOMNOM",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "OMNOMNOM", Toast.LENGTH_SHORT).show();
     }
 
     @Override

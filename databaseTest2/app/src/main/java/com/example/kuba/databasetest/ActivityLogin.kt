@@ -21,6 +21,7 @@ class ActivityLogin : AppCompatActivity() {
     lateinit var LoginLog: EditText
     lateinit var PasswordLog: EditText
     lateinit var ViewAllUser: Button
+    lateinit var ResetAll: Button
     lateinit var myDb: DatabaseHelper
 
 
@@ -33,11 +34,14 @@ class ActivityLogin : AppCompatActivity() {
         LoginLog=findViewById(R.id.loginLog)
         PasswordLog=findViewById(R.id.passwordLog)
         ViewAllUser=findViewById(R.id.viewAllUser)
+        ResetAll=findViewById(R.id.resetAll)
+
         myDb = DatabaseHelper(this)
 
         goRegist()
         logIn()
         viewAllData()
+        HardReset()
     }
 
     private fun goRegist(){
@@ -101,6 +105,12 @@ class ActivityLogin : AppCompatActivity() {
                 showMessage("Data", buffer.toString())
                 res.close()
             }
+        })
+    }
+
+    private fun HardReset(){
+        ResetAll.setOnClickListener(View.OnClickListener {
+            myDb.resetAll()
         })
     }
 

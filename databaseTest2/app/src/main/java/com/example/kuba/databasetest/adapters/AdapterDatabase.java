@@ -82,10 +82,11 @@ public class AdapterDatabase extends RecyclerView.Adapter<AdapterDatabase.ViewHo
                     if(position != RecyclerView.NO_POSITION)
                     {
                         if(TextUtils.isEmpty(mMultiplier.getText().toString()) ||
-                                mMultiplier.getText().toString().equals("0"))
-                        {
+                                mMultiplier.getText().toString().equals("0")) {
                             System.out.println("ERROR! Field cannot be empty or equal 0!!!");
                             //TODO: Make toast
+                        }else if ( Double.parseDouble(mMultiplier.getText().toString())> 99){
+                            System.out.println("ERROR! Field cannot be over 9000!!!!");
                         }else {
                             multiplier = Double.parseDouble((mMultiplier.getText().toString()));
                             listener.onAddClick(position, multiplier);
