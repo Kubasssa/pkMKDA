@@ -1,11 +1,14 @@
 package com.example.kuba.databasetest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,7 +34,7 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
     boolean ifUserExist, isInserted = true,isInserted2 =true;
 
     EditText ageInput, weightInput, heightInput,nameInput, passwordInput;
-    Button addButton,button,button2, BackButton;
+    Button addButton,button,button2, BackButton, showProfileButton;
 
     DatabaseHelper helper;
 
@@ -57,6 +60,7 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
         button2 = (Button) findViewById(R.id.editProfile_button_increase);
         diffInput = (TextView) findViewById(R.id.editProfile_textview_monthly_change);
         BackButton = (Button) findViewById(R.id.editProfile_button_back);
+        showProfileButton = (Button) findViewById(R.id.editProfile_button_show_profile);
 
         //init value of diffInput
         diffInput.setText(String.format("%.1f",diffInputValue));
@@ -173,6 +177,14 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
                 }
             }
         });
+
+        showProfileButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                showProfile();
+            }
+        });
     }
 
     @Override
@@ -187,6 +199,54 @@ public class ActivityEditProfile extends AppCompatActivity implements AdapterVie
     }
     private void showToast(String text){
         Toast.makeText(ActivityEditProfile.this,text,Toast.LENGTH_SHORT).show();
+    }
+
+    public void showProfile() {
+
+        //TODO: same class as EatenProductBuilder
+        android.support.v7.app.AlertDialog.Builder userProfile = new android.support.v7.app.AlertDialog.Builder(getApplicationContext());
+
+        /** inflate view on the aleartdialog**/
+        LayoutInflater inflater = getLayoutInflater();
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.layout_user_profile, null);
+        userProfile.setView(view)
+                .setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+        /** init textviews**/
+        //TODO: Tu się pokazują ceb(n)u(l)le :/
+        TextView mUserName = (TextView) findViewById(R.id.showProfile_00);
+        TextView mUserSex = (TextView) findViewById(R.id.showProfile_01);
+        TextView mUserAge = (TextView) findViewById(R.id.showProfile_02);
+        TextView mCurrentWeight = (TextView) findViewById(R.id.showProfile_03);
+        TextView mCurrentHeight = (TextView) findViewById(R.id.showProfile_04);
+        //TextView mWeightGoal = findViewById(R.id.showProfile_05);
+
+        /** apply values **/
+        Cursor cur = helper.getAllUsersData();
+        Cursor allData = helper.getProfileSettings();
+        String userName = "ERR";
+        while (cur.moveToNext()) {userName = cur.getString(1);}
+        while (allData.moveToNext()) {
+            System.out.println(allData.getString(1));
+
+            sex = allData.getString(1);
+            height = allData.getFloat(2);
+            age = allData.getFloat(4);
+            weight = allData.getFloat(3);
+        }
+//
+//        mUserName.setText(userName);
+//        mUserSex.setText(sex);
+//        mUserAge.setText(age.toString());
+//        mCurrentHeight.setText(height.toString());
+//        mCurrentWeight.setText(weight.toString());
+
+        userProfile.show();
     }
 }
 

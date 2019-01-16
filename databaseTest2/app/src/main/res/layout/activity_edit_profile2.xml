@@ -157,6 +157,18 @@
                 tools:layout_editor_absoluteX="14dp"
                 tools:layout_editor_absoluteY="457dp" />
 
+            <Button
+                android:id="@+id/editProfile_button_show_profile"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-48dp"
+                android:layout_marginRight="200dp"
+                android:background="@drawable/remove_button"
+                android:text="Show Profile"
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="14dp"
+                tools:layout_editor_absoluteY="457dp" />
+
         </TableLayout>
 
 
