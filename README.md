@@ -9,13 +9,14 @@ Projekt kompetencyjny.
     ~~>desc: Button 'addFromDatabase' we fragmencie FragmentEaten; layouty; kolory backgroundcolor; czcionki~~
     - ~~Dodanie szczegółów zjedzonego produktu~~
   - ~~ActivityEditProfile -> oprócz kalorii zmiana wszystkich wartości odżywczych + odświeżanie + zmienić nazwy tabów~~
-  - ActivityEditProfile -> możliwość zmiany tylko niektórych pól
+  - ~~ActivityEditProfile -> możliwość zmiany tylko niektórych pól~~
   - ~~Dodawanie 'części' produktu~~
   - ~~Dodawanie własnych produktów do bazy danych **dokończyć**~~
-  - Usuwanie produktów z bazy danych? !! DUŻO ROBOTY !!
+  - Usuwanie produktów z bazy danych?
   - ~~Bugfix z populateDatabse() (produkty Madzi crashują apke)~~
   - ~~Napisać algorytm liczący węgle, białko, tłuszcz~~
     ~~>desc: póki co zrobiłem liczenie takie jakie jest opisane w DatabaseHelper.kt w metodzie onCreate na samym dole w komentarzu~~
+  - Naprawić wyświetlanie profilu użytkownika w 'FragmentStats'
   - Optymalizacja zasobów procesora: guzik 'Remove All' w FragmentEaten
   - Optymalizacja kodu: funkcja FragmentEaten -> showEatenProductDetails(int) -> napisać clase zamiast bałaganu w metodzie 
   
